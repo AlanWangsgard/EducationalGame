@@ -5,9 +5,13 @@ class QuestionGenerator:
         pass
 
     def generate_sum_question(self):
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "+", answer)
+        # return question
         pass
 
     def generate_difference_question(self):
+        # "-"
         pass
 
     def generate_product_question(self):
