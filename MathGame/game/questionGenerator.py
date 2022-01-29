@@ -1,4 +1,7 @@
 # Generates questions for the math game.
+from game.question import Question
+import random
+
 class QuestionGenerator:
 
     def __init__(self, difficulty = 0):
@@ -8,7 +11,12 @@ class QuestionGenerator:
         # pick two numbers, and figure out the answer
         # question = Question(num1, num2, "+", answer)
         # return question
-        pass
+        num1 = random.randint(0, 10)
+        num2 = random.randint(0, 10)
+        operator = "+"
+        ans = num1 + num2
+        q = Question(num1, operator, num2, ans)
+        return q
 
     def generate_difference_question(self):
         # "-"
@@ -28,25 +36,3 @@ class QuestionGenerator:
 
     def increment_difficulty(self):
         pass
-
-
-private int num1;
-    private int num2;
-    private int ans;
-    private Timer time;
-    private Timer tStart;
-    private int tCount;
-    private int correct;
-    private int tLimit;
-    public boolean add = true;
-    public boolean minus;
-    public boolean mult;
-    public boolean div;
-
-
-    new_question
-    ans = 0;
-		if (add){
-    	    num1 = (int) (Math.random() * 10);
-    	    num2 = (int) (Math.random() * 10);
-		}
