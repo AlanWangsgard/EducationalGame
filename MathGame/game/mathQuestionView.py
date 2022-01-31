@@ -1,5 +1,4 @@
 import arcade
-from arcade.gui import UIManager # i think I need this, but I'm not sure.
 from game.questionGenerator import QuestionGenerator
 from game import constants ### WHEN WE REORGANIZE THE FILESYSTEM, THIS WILL NEED CHANGED
 
@@ -7,10 +6,12 @@ from game import constants ### WHEN WE REORGANIZE THE FILESYSTEM, THIS WILL NEED
 class MathQuestionView(arcade.View):
     """ Class that manages the math question view."""
 
-    def __init__(self):
+    def __init__(self, window = None):
         # Initialize the math question view.
         super().__init__()
         self.__question_generator = QuestionGenerator()
+        self.window = window
+        
 
     def on_show(self):
         # Called when switching to this vew
@@ -19,6 +20,7 @@ class MathQuestionView(arcade.View):
     
     def setup(self):
         # Do any setup of variables or timings or colors we need.
+        self.__correct = 0
         self.new_question()
 
     def new_question(self):
@@ -32,14 +34,18 @@ class MathQuestionView(arcade.View):
         # Will also need to draw the user's input.
         # And if the user gets it right, we'll need to let them know.
         arcade.start_render()
-        arcade.draw_text(self.__question.to_string(), constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2,
-                         arcade.color.LAVA, font_size = 80, anchor_x = 'center', anchor_y = 'center')
-        '''arcade.draw_text() # The first number.
-        arcade.draw_text() # The operator.
-        arcade.draw_text() # The second operator.
-        arcade.draw_text() # A big bar across, separating the question from the user's input.'''
-        arcade.draw_text(self.__user_input, constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2 + 200,
-                         arcade.color.PURPLE_PIZZAZZ, font_size = 80, anchor_x = 'center', anchor_y = 'center') # The user's input. 
+        #arcade.draw_text(self.__question.to_string(), constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2,
+        #                 arcade.color.LAVA, font_size = 80, anchor_x = 'center', anchor_y = 'center')
+        arcade.draw_text(self.__question.get_first_num(), constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2 + 150,
+                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The first number.
+        arcade.draw_text(self.__question.get_operator(), constants.SCREEN_WIDTH / 2 - 100, constants.SCREEN_HEIGHT / 2 + 50,
+                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The operator.
+        arcade.draw_text(self.__question.get_second_num(), constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2 + 50,
+                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The second operator.
+        arcade.draw_text("_____", constants.SCREEN_WIDTH / 2 + 25, constants.SCREEN_HEIGHT / 2 + 25,
+                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # A big bar across, separating the question from the user's input.
+        arcade.draw_text(self.__user_input, constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2 - 100,
+                         arcade.color.PURPLE_PIZZAZZ, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The user's input. 
 
     def on_key_press(self, symbol, modifiers):
         # What happens when the user presses a key.
@@ -53,6 +59,9 @@ class MathQuestionView(arcade.View):
             if self.__question.check_answer(int(self.__user_input)):
                 # They got it right!
                 print("Correct!")
+                self.__correct += 1
+                if (self.__correct >= 5):
+                    self.window.show_view(self.window.Frogger)
                 self.new_question()
                 arcade.set_background_color(arcade.color.GRANNY_SMITH_APPLE)
             else:
