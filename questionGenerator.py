@@ -65,7 +65,7 @@ class QuestionGenerator:
         # pick two numbers, and figure out the answer
         # question = Question(num1, num2, "/", answer)
         # return question
-        operator = '-'
+        operator = '/'
         if self.difficulty == 0:
             num1 = rand.randint(0, 9)
             num2 = rand.randint(0, 9)
