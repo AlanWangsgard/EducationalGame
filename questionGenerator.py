@@ -1,36 +1,90 @@
+import random as rand
+
 # Generates questions for the math game.
 class QuestionGenerator:
+    # Initials the two numbers involved in the operation to zero.
+    num1 = 0
+    num2 = 0
 
     def __init__(self, difficulty = 0):
-        pass
+        self.difficulty = difficulty
 
     def generate_sum_question(self):
         # pick two numbers, and figure out the answer
         # question = Question(num1, num2, "+", answer)
         # return question
-        pass
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 9)
+            num2 = rand.randint(0, 9)
+        elif self.difficulty == 1:
+            num1 = rand.randint(10, 19)
+            num2 = rand.randint(10, 19)
+        elif self.difficulty == 2:
+            num1 = rand.randint(20, 29)
+            num2 = rand.randint(20, 29)
+
+        return f"{num1} + {num2} ="
 
     def generate_difference_question(self):
-        # "-"
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "-", answer)
+        # return question
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 9)
+            num2 = rand.randint(0, 9)
+        elif self.difficulty == 1:
+            num1 = rand.randint(10, 19)
+            num2 = rand.randint(10, 19)
+        elif self.difficulty == 2:
+            num1 = rand.randint(20, 29)
+            num2 = rand.randint(20, 29)
+
+        return f"{num1} - {num2} ="
 
     def generate_product_question(self):
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "*", answer)
+        # return question
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 9)
+            num2 = rand.randint(0, 9)
+        elif self.difficulty == 1:
+            num1 = rand.randint(10, 19)
+            num2 = rand.randint(10, 19)
+        elif self.difficulty == 2:
+            num1 = rand.randint(20, 29)
+            num2 = rand.randint(20, 29)
+
+        return f"{num1} * {num2} ="
 
     def generate_quotient_question(self):
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "/", answer)
+        # return question
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 9)
+            num2 = rand.randint(0, 9)
+        elif self.difficulty == 1:
+            num1 = rand.randint(10, 19)
+            num2 = rand.randint(10, 19)
+        elif self.difficulty == 2:
+            num1 = rand.randint(20, 29)
+            num2 = rand.randint(20, 29)
+
+        return f"{num1} / {num2} ="
 
     def get_difficulty(self):
-        pass
+        return self.difficulty
 
     def set_difficulty(self):
         pass
 
     def increment_difficulty(self):
-        pass
+        difficulty = QuestionGenerator.get_difficulty()
+        return  difficulty + 1
 
 
-private int num1;
+""" private int num1;
     private int num2;
     private int ans;
     private Timer time;
@@ -49,4 +103,4 @@ private int num1;
 		if (add){
     	    num1 = (int) (Math.random() * 10);
     	    num2 = (int) (Math.random() * 10);
-		}
+		} """
