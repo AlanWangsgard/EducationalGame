@@ -2,6 +2,9 @@ import random as rand
 from game.question import Question
 
 # Generates questions for the math game.
+from game.question import Question
+import random
+
 class QuestionGenerator:
     # Initials the two numbers involved in the operation to zero.
     num1 = 0
