@@ -87,25 +87,3 @@ class QuestionGenerator:
     def increment_difficulty(self):
         difficulty = QuestionGenerator.get_difficulty()
         return  difficulty + 1
-
-
-""" private int num1;
-    private int num2;
-    private int ans;
-    private Timer time;
-    private Timer tStart;
-    private int tCount;
-    private int correct;
-    private int tLimit;
-    public boolean add = true;
-    public boolean minus;
-    public boolean mult;
-    public boolean div;
-
-
-    new_question
-    ans = 0;
-		if (add){
-    	    num1 = (int) (Math.random() * 10);
-    	    num2 = (int) (Math.random() * 10);
-		} """
