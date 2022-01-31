@@ -1,38 +1,92 @@
+import random as rand
+from game.question import Question
+
 # Generates questions for the math game.
 from game.question import Question
 import random
 
 class QuestionGenerator:
+    # Initials the two numbers involved in the operation to zero.
+    num1 = 0
+    num2 = 0
 
     def __init__(self, difficulty = 0):
-        pass
+        self.difficulty = difficulty
 
     def generate_sum_question(self):
         # pick two numbers, and figure out the answer
         # question = Question(num1, num2, "+", answer)
         # return question
-        num1 = random.randint(0, 10)
-        num2 = random.randint(0, 10)
-        operator = "+"
-        ans = num1 + num2
-        q = Question(num1, operator, num2, ans)
+        operator = '+'
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
+        elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
+            num1 = rand.randint(10, 20)
+            num2 = rand.randint(10, 20)
+        q = Question(num1, num2, operator)
         return q
 
     def generate_difference_question(self):
-        # "-"
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "-", answer)
+        # return question
+        operator = '-'
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
+        elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
+            num1 = rand.randint(10, 20)
+            num2 = rand.randint(10, 20)
+        q = Question(num1, num2, operator)
+        return q
 
     def generate_product_question(self):
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "*", answer)
+        # return question
+        operator = '*'
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
+        elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
+            num1 = rand.randint(10, 20)
+            num2 = rand.randint(10, 20)
+        q = Question(num1, num2, operator)
+        return q
 
     def generate_quotient_question(self):
-        pass
+        # pick two numbers, and figure out the answer
+        # question = Question(num1, num2, "/", answer)
+        # return question
+        operator = '/'
+        if self.difficulty == 0:
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
+        elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
+            num1 = rand.randint(10, 20)
+            num2 = rand.randint(10, 20)
+        q = Question(num1, num2, operator)
+        return q
 
     def get_difficulty(self):
-        pass
+        return self.difficulty
 
     def set_difficulty(self):
         pass
 
     def increment_difficulty(self):
-        pass
+        difficulty = QuestionGenerator.get_difficulty()
+        return  difficulty + 1
