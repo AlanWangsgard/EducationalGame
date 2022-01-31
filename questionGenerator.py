@@ -16,14 +16,14 @@ class QuestionGenerator:
         # return question
         operator = '+'
         if self.difficulty == 0:
-            num1 = rand.randint(0, 9)
-            num2 = rand.randint(0, 9)
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
         elif self.difficulty == 1:
-            num1 = rand.randint(10, 19)
-            num2 = rand.randint(10, 19)
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
         elif self.difficulty == 2:
-            num1 = rand.randint(10, 29)
-            num2 = rand.randint(10, 29)
+            num1 = rand.randint(10, 20)
+            num2 = rand.randint(10, 20)
         q = Question(num1, num2, operator)
         return q
 
@@ -33,14 +33,14 @@ class QuestionGenerator:
         # return question
         operator = '-'
         if self.difficulty == 0:
-            num1 = rand.randint(0, 9)
-            num2 = rand.randint(0, 9)
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
         elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
             num1 = rand.randint(10, 20)
             num2 = rand.randint(10, 20)
-        elif self.difficulty == 2:
-            num1 = rand.randint(10, 29)
-            num2 = rand.randint(10, 29)
         q = Question(num1, num2, operator)
         return q
 
@@ -50,14 +50,14 @@ class QuestionGenerator:
         # return question
         operator = '*'
         if self.difficulty == 0:
-            num1 = rand.randint(0, 9)
-            num2 = rand.randint(0, 9)
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
         elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
             num1 = rand.randint(10, 20)
             num2 = rand.randint(10, 20)
-        elif self.difficulty == 2:
-            num1 = rand.randint(10, 29)
-            num2 = rand.randint(10, 29)
         q = Question(num1, num2, operator)
         return q
 
@@ -67,14 +67,14 @@ class QuestionGenerator:
         # return question
         operator = '/'
         if self.difficulty == 0:
-            num1 = rand.randint(0, 9)
-            num2 = rand.randint(0, 9)
+            num1 = rand.randint(0, 5)
+            num2 = rand.randint(0, 5)
         elif self.difficulty == 1:
+            num1 = rand.randint(1, 10)
+            num2 = rand.randint(1, 10)
+        elif self.difficulty == 2:
             num1 = rand.randint(10, 20)
             num2 = rand.randint(10, 20)
-        elif self.difficulty == 2:
-            num1 = rand.randint(10, 29)
-            num2 = rand.randint(10, 29)
         q = Question(num1, num2, operator)
         return q
 
