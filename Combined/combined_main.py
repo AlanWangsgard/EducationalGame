@@ -9,7 +9,7 @@ class Conductor():
 
     def main(self):
         self.window = arcade.Window(
-            SCREEN_WIDTH, SCREEN_HEIGHT, "The Best Team")
+            SCREEN_WIDTH, SCREEN_HEIGHT, "The Best Team ")
         game = Director(self.window)
         game.setup()
         self.window.Frogger = game
