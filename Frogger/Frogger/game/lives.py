@@ -1,5 +1,5 @@
 import arcade
-from game.constants import LIFE_SPACING, LIFE_POSITION_START, LIFE_COUNT
+from Frogger.Frogger.game.constants import LIFE_SPACING, LIFE_POSITION_START, LIFE_COUNT
 
 class Lives(arcade.Sprite):
     """
