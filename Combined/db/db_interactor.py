@@ -50,4 +50,4 @@ class DB_Interactor():
         scores.append(score)
         scores = sorted(scores)
         for score_index in range(num_high_scores):
-            self.__db.collection(self.COLLECTION).document(str(score_index)).update({self.DOCUMENT_KEY: scores[score_index]})
+            self.__db.collection(self.COLLECTION).document(str(score_index+1)).update({self.DOCUMENT_KEY: scores[score_index]})
