@@ -69,6 +69,7 @@ class Director(arcade.View):
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
+        self.has_contacted_db = False
         self.level_one()
         
     def on_draw(self):
@@ -156,6 +157,11 @@ class Director(arcade.View):
                 self.car_list = arcade.SpriteList()
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
+                if not self.has_contacted_db:
+                    
+                    self.has_contacted_db = True
+                    pass
+                    
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
                 self.winner = True
