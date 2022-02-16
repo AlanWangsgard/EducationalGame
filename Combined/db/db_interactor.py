@@ -65,6 +65,8 @@ class DB_Interactor():
         #       update document 2 with the second highest score.
         #       Update doc 3 w 3rd, doc 4 w 4th, and doc 5 w 5th.
         #   End
+        documents = self.get_all_scores()
+        
 
         # This line of code gets a document and updates the score. Put it in a loop.
         self.__db.collection(self.COLLECTION).document(document_id_should_be_1_to_5).update({self.DOCUMENT_KEY: score_it_should_be})
