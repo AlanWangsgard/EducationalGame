@@ -1,7 +1,7 @@
 import arcade
 import random
 from game.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, MOVEMENT_SPEED, NO_MOVEMENT, Y_COUNT, Y_SPACING, \
-    Y_START, LIFE_COUNT, LIFE_POSITION_START, LIFE_SPACING, NUM_CARS_PER_ROW, PICTURES_PATH, MINIMUM_TIME
+    Y_START, LIFE_COUNT, LIFE_POSITION_START, LIFE_SPACING, NUM_CARS_PER_ROW, PICTURES_PATH, MINIMUM_TIME, CERT_FILE_PATH
 from game.player import Player
 from game.coin import Coin
 from game.car import Car
@@ -164,11 +164,11 @@ class Director(arcade.View):
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
                 if not self.has_contacted_db:
-                    
                     self.has_contacted_db = True
-                    scores_list = DB_Interactor.get_all_scores()
+                    dbi = DB_Interactor(CERT_FILE_PATH)
+                    scores_list = dbi.get_all_scores()
                     self.high_scores = scores_list
-                    DB_Interactor.update_scores(self.score)
+                    dbi.update_scores(self.score)
                     
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()

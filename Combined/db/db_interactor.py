@@ -15,9 +15,9 @@ class DB_Interactor():
     def __init__(self, filepath):
         # filepath is the path to the json certificate for firebase.
         assert filepath
-        self.__db = self.get_database_ref(filepath)
+        self.__db = self.__get_database_ref(filepath)
 
-    def get_database_ref(self, filepath):
+    def __get_database_ref(self, filepath):
         # filepath is the path to the json certificate for firebase.
         cred = credentials.Certificate(filepath)
         firebase_admin.initialize_app(cred)
@@ -28,27 +28,16 @@ class DB_Interactor():
         # If the database reference is set up, then this Interactor is ready.
         return not self.__db == None
 
-    def display_doc_list(self, doc_list):
-        # Tries to print a list of docs prettily.
-        dict_list = [doc.to_dict() for doc in doc_list]
-        if not dict_list:
-            print("No songs found")
-        else:
-            # Print header
-            print("Score:")
-            # Print all the scores
-            for entry in dict_list:
-                print("\t", entry[self.DOCUMENT_KEY])
-
-    def get_all_scores(self, display = False):
-        # Gets all song documents in the database, in alphabetical order.
+    def get_all_scores(self):
+        # Gets all score documents in the database in order.
         score_collection = self.__db.collection(self.COLLECTION)
         score_docs = [*score_collection.order_by(u"score").get()]
         if not score_docs:
-            print("No songs found")
-        elif display:
-            self.display_doc_list(score_docs)
-        return score_docs
+            print("No scores found")
+        score_dicts = []
+        for score_doc in score_docs:
+            score_dicts.append(score_doc.to_dict()["score"])
+        return score_dicts
 
     def add_score(self, score):
         # Adds a score to the database.
@@ -56,17 +45,9 @@ class DB_Interactor():
 
     def update_scores(self, score):
         # Determine where the user's score fits in to the cloud database and update the cloud scores.
-        # Process:
-        #   Get all the scores from the database and store them in a list.
-        #   Add the user's score to the list.
-        #   Sort the list highest to lowest.
-        #   FOR THE TOP 5 SCORES ONLY:
-        #       update document 1 with the highest score.
-        #       update document 2 with the second highest score.
-        #       Update doc 3 w 3rd, doc 4 w 4th, and doc 5 w 5th.
-        #   End
-        documents = self.get_all_scores()
-        
-
-        # This line of code gets a document and updates the score. Put it in a loop.
-        self.__db.collection(self.COLLECTION).document(document_id_should_be_1_to_5).update({self.DOCUMENT_KEY: score_it_should_be})
+        scores = self.get_all_scores()
+        num_high_scores = len(scores)
+        scores.append(score)
+        scores = sorted(scores)
+        for score_index in range(num_high_scores):
+            self.__db.collection(self.COLLECTION).document(str(score_index)).update({self.DOCUMENT_KEY: scores[score_index]})
