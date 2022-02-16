@@ -36,7 +36,7 @@ class DB_Interactor():
             print("No scores found")
         score_dicts = []
         for score_doc in score_docs:
-            score_dicts.append(score_doc.to_dict()["score"])
+            score_dicts = [score_doc.to_dict()["score"]] + score_dicts
         return score_dicts
 
     def add_score(self, score):
@@ -48,6 +48,6 @@ class DB_Interactor():
         scores = self.get_all_scores()
         num_high_scores = len(scores)
         scores.append(score)
-        scores = sorted(scores)
+        scores = sorted(scores, reverse = True)
         for score_index in range(num_high_scores):
             self.__db.collection(self.COLLECTION).document(str(score_index+1)).update({self.DOCUMENT_KEY: scores[score_index]})

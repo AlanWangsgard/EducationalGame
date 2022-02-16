@@ -96,18 +96,23 @@ class Director(arcade.View):
                              anchor_x="center")
         elif self.winner:
             winner = f"You have won"
-            arcade.draw_text(winner, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,
+            arcade.draw_text(winner, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200,
                              arcade.color.AO, 80,
                              anchor_x="center")
             self.run_timer = False
             final_score = f"Final Score:{self.score}"
             arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
                              anchor_x="center")
-            space = 10
-            for score in self.high_scores:
-                arcade.draw_text(score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, arcade.color.WHITE, 25,
+            arcade.draw_text("High Scores: ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, arcade.color.WHITE, 25,
                              anchor_x="center")
-                space += 10
+            space = 100
+            for score in self.high_scores:
+                color = arcade.color.WHITE
+                if score == self.score:
+                    color = arcade.color.CHARTREUSE
+                arcade.draw_text(str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, color, 25,
+                             anchor_x="center")
+                space += 50
             
 
     def on_update(self, delta_time):
@@ -166,9 +171,9 @@ class Director(arcade.View):
                 if not self.has_contacted_db:
                     self.has_contacted_db = True
                     dbi = DB_Interactor(CERT_FILE_PATH)
+                    dbi.update_scores(self.score)
                     scores_list = dbi.get_all_scores()
                     self.high_scores = scores_list
-                    dbi.update_scores(self.score)
                     
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
