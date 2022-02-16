@@ -9,8 +9,6 @@ class Menu(arcade.View):
         self.start_button = arcade.gui.UIFlatButton(
             center_x=400, center_y=300, text="Start Game", width=200)
 
-        self.start_button.on_click = self.clickstart
-
     def on_show(self):
         """ This is run once when we switch to this view """
         self.window.clear()
