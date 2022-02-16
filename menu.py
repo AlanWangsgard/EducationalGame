@@ -29,7 +29,3 @@ class Menu(arcade.View):
         if _x >= 300 and _x <= 500 and _y >=280 and _y <= 320:
             self.window.show_view(self.window.Frogger)
 
-    def clickstart(self):
-        print("click")
-        # self.window.show_view(self.window.Frogger)
-
