@@ -6,6 +6,7 @@ from game.player import Player
 from game.coin import Coin
 from game.car import Car
 from game.lives import Lives
+from db.db_interactor import DB_Interactor
 
 class Director(arcade.View):
     """A code template for a person who directs the game. The responsibility of 
@@ -102,6 +103,11 @@ class Director(arcade.View):
             final_score = f"Final Score:{self.score}"
             arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
                              anchor_x="center")
+            space = 10
+            for score in self.high_scores:
+                arcade.draw_text(score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, arcade.color.WHITE, 25,
+                             anchor_x="center")
+                space += 10
             
 
     def on_update(self, delta_time):
@@ -160,7 +166,9 @@ class Director(arcade.View):
                 if not self.has_contacted_db:
                     
                     self.has_contacted_db = True
-                    pass
+                    scores_list = DB_Interactor.get_all_scores()
+                    self.high_scores = scores_list
+                    DB_Interactor.update_scores(self.score)
                     
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
