@@ -4,7 +4,14 @@ class FroggerLocalDB:
     
     def __init__(self) -> None:
         self.connection = self.connect()
-        self.create_tables()
+
+    def initializeDB(self):
+        try:
+            self.create_tables()
+            print('Database created successfully!')
+        except:
+            print('Something went wrong while creating the database.')
+
 
     def create_tables(self):
         cur = self.connection.cursor()
