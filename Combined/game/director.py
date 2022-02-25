@@ -1,11 +1,12 @@
 import arcade
 import random
-from Frogger.Frogger.game.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, MOVEMENT_SPEED, NO_MOVEMENT, Y_COUNT, Y_SPACING, \
-    Y_START, LIFE_COUNT, LIFE_POSITION_START, LIFE_SPACING, NUM_CARS_PER_ROW, PICTURES_PATH, MINIMUM_TIME
-from Frogger.Frogger.game.player import Player
-from Frogger.Frogger.game.coin import Coin
-from Frogger.Frogger.game.car import Car
-from Frogger.Frogger.game.lives import Lives
+from game.constants import SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, MOVEMENT_SPEED, NO_MOVEMENT, Y_COUNT, Y_SPACING, \
+    Y_START, LIFE_COUNT, LIFE_POSITION_START, LIFE_SPACING, NUM_CARS_PER_ROW, PICTURES_PATH, MINIMUM_TIME, CERT_FILE_PATH
+from game.player import Player
+from game.coin import Coin
+from game.car import Car
+from game.lives import Lives
+from db.db_interactor import DB_Interactor
 
 class Director(arcade.View):
     """A code template for a person who directs the game. The responsibility of 
@@ -41,15 +42,26 @@ class Director(arcade.View):
             self(director): an instance of director
         """
         # super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        self.car_collision_sound = arcade.load_sound(":resources:sounds/hit1.wav")
+        self.coin_collision_sound = arcade.load_sound(":resources:sounds/coin1.wav")
+        self.next_level_sound = arcade.load_sound(":resources:sounds/upgrade1.wav")
+        self.window = window
+        self.setup()
+
+    def on_show_view(self):
+        self.setup()
+        return super().on_show_view()
+
+    def setup(self):
+        """
+        starts to run the game
+        """
         self.game_over = False
         self.winner = False
         self.player_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
         self.car_list = arcade.SpriteList()
         self.life_list = arcade.SpriteList()
-        self.car_collision_sound = arcade.load_sound(":resources:sounds/hit1.wav")
-        self.coin_collision_sound = arcade.load_sound(":resources:sounds/coin1.wav")
-        self.next_level_sound = arcade.load_sound(":resources:sounds/upgrade1.wav")
         self.coin = None
         self.player = None
         self.score = 0
@@ -58,13 +70,7 @@ class Director(arcade.View):
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
-        self.window = window
-        # self.level_complete = False
-
-    def setup(self):
-        """
-        starts to run the game
-        """
+        self.has_contacted_db = False
         self.level_one()
         
     def on_draw(self):
@@ -84,23 +90,29 @@ class Director(arcade.View):
                          anchor_x="center")
         gameOver = f"Game Over"
 
-     
-
         if self.game_over:
             arcade.draw_text(gameOver, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,
                              arcade.color.RED, 100,
                              anchor_x="center")
-            self.change_view()
         elif self.winner:
             winner = f"You have won"
-            arcade.draw_text(winner, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,
+            arcade.draw_text(winner, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 200,
                              arcade.color.AO, 80,
                              anchor_x="center")
             self.run_timer = False
             final_score = f"Final Score:{self.score}"
             arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
                              anchor_x="center")
-            self.change_view()
+            arcade.draw_text("High Scores: ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, arcade.color.WHITE, 25,
+                             anchor_x="center")
+            space = 100
+            for score in self.high_scores:
+                color = arcade.color.WHITE
+                if score == self.score:
+                    color = arcade.color.CHARTREUSE
+                arcade.draw_text(str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, color, 25,
+                             anchor_x="center")
+                space += 50
             
 
     def on_update(self, delta_time):
@@ -133,6 +145,7 @@ class Director(arcade.View):
                     self.game_over = True
                     print("Game Over")
                     self.player_list.remove(self.player)
+                    self.window.show_view(self.window.math_game)
 
             if self.run_timer == True:
                 self.total_time += delta_time
@@ -147,17 +160,21 @@ class Director(arcade.View):
                 self.player_list.pop()
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
-                self.level_complete = True
-                self.change_view()
                 self.level_two()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 2:
                 self.level += 1
                 self.coin_list = arcade.SpriteList()
                 self.player_list.pop()
                 self.car_list = arcade.SpriteList()
-                self.change_view()
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
+                if not self.has_contacted_db:
+                    self.has_contacted_db = True
+                    dbi = DB_Interactor(CERT_FILE_PATH)
+                    dbi.update_scores(self.score)
+                    scores_list = dbi.get_all_scores()
+                    self.high_scores = scores_list
+                    
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
                 self.winner = True
@@ -272,6 +289,3 @@ class Director(arcade.View):
         self.player_list.append(self.player)
         self.coin_list.append(self.coin)
         self.next_level_sound.play()
-
-    def change_view(self):
-        self.window.show_view(self.window.menu)

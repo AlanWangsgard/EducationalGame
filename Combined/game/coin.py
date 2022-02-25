@@ -1,7 +1,6 @@
+from game.constants import SPRITE_SCALING_COIN, SCREEN_WIDTH, SCREEN_HEIGHT
 import arcade
-from Frogger.Frogger.game.constants import SPRITE_SCALING_COIN
 import random
-from Frogger.Frogger.game.constants import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class Coin(arcade.Sprite):

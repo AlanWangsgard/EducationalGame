@@ -1,7 +1,7 @@
 import arcade
 from arcade.key import Y
 from arcade.sprite import PyMunk
-from Frogger.Frogger.game.constants import CAR_SPRITE_SCALING, SCREEN_HEIGHT, SCREEN_WIDTH, PICTURES_PATH, Y_SPACING
+from game.constants import CAR_SPRITE_SCALING, SCREEN_HEIGHT, SCREEN_WIDTH, PICTURES_PATH, Y_SPACING
 import random
 
 

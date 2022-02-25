@@ -1,5 +1,5 @@
 import arcade
-from Frogger.Frogger.game.constants import SPRITE_SCALING, SCREEN_WIDTH, SCREEN_HEIGHT
+from game.constants import SPRITE_SCALING, SCREEN_WIDTH, SCREEN_HEIGHT
 import os
 
 
