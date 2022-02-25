@@ -1,0 +1,5 @@
+# Ignore the pycache folder. It's automatically built whenever you're importing local classes
+# and it'll need rebuilt for every single one of us. Best to just leave out.
+__pycache__/
+**/__pycache__
+cert.json
