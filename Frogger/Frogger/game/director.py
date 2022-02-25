@@ -59,6 +59,7 @@ class Director(arcade.View):
         self.output = "00:00:00"
         self.run_timer = True
         self.window = window
+        # self.level_complete = False
 
     def setup(self):
         """
@@ -83,10 +84,13 @@ class Director(arcade.View):
                          anchor_x="center")
         gameOver = f"Game Over"
 
+     
+
         if self.game_over:
             arcade.draw_text(gameOver, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,
                              arcade.color.RED, 100,
                              anchor_x="center")
+            self.change_view()
         elif self.winner:
             winner = f"You have won"
             arcade.draw_text(winner, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 - 50,
@@ -96,6 +100,7 @@ class Director(arcade.View):
             final_score = f"Final Score:{self.score}"
             arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
                              anchor_x="center")
+            self.change_view()
             
 
     def on_update(self, delta_time):
@@ -142,12 +147,15 @@ class Director(arcade.View):
                 self.player_list.pop()
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
+                self.level_complete = True
+                self.change_view()
                 self.level_two()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 2:
                 self.level += 1
                 self.coin_list = arcade.SpriteList()
                 self.player_list.pop()
                 self.car_list = arcade.SpriteList()
+                self.change_view()
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
                 self.coin_list = arcade.SpriteList()
@@ -264,3 +272,6 @@ class Director(arcade.View):
         self.player_list.append(self.player)
         self.coin_list.append(self.coin)
         self.next_level_sound.play()
+
+    def change_view(self):
+        self.window.show_view(self.window.menu)
