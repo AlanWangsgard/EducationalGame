@@ -1,6 +1,8 @@
 from game.director import Director
 from game.mathQuestionView import MathQuestionView
 from game.constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from menu import Menu
+from endscreen import EndScreen
 import arcade
 
 class Conductor():
@@ -13,8 +15,11 @@ class Conductor():
         game = Director(self.window)
         game.setup()
         self.window.Frogger = game
+        self.window.menu = Menu(self.window)
         self.window.math_game = MathQuestionView(self.window)
-        self.window.show_view(self.window.Frogger)
+        self.window.endscreen = EndScreen(self.window)
+        self.window.playerScore = 0
+        self.window.show_view(self.window.menu)
         arcade.run()
 
 

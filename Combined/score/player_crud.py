@@ -1,4 +1,4 @@
-from crud import CrudDB
+from score.crud import CrudDB
 
 
 class PlayerCRUD(CrudDB):
@@ -25,6 +25,7 @@ class PlayerCRUD(CrudDB):
     
     def getPlayerByName(self, name):
         return super().getByField('name', f"'{name}'")
+
 if __name__ == "__main__":
     player = PlayerCRUD()
     player.addPlayer('Daniell')

@@ -6,7 +6,6 @@ from game.player import Player
 from game.coin import Coin
 from game.car import Car
 from game.lives import Lives
-from db.db_interactor import DB_Interactor
 
 class Director(arcade.View):
     """A code template for a person who directs the game. The responsibility of 
@@ -49,7 +48,6 @@ class Director(arcade.View):
         self.setup()
 
     def on_show_view(self):
-        self.setup()
         return super().on_show_view()
 
     def setup(self):
@@ -70,7 +68,6 @@ class Director(arcade.View):
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
-        self.has_contacted_db = False
         self.level_one()
         
     def on_draw(self):
@@ -100,20 +97,6 @@ class Director(arcade.View):
                              arcade.color.AO, 80,
                              anchor_x="center")
             self.run_timer = False
-            final_score = f"Final Score:{self.score}"
-            arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
-                             anchor_x="center")
-            arcade.draw_text("High Scores: ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, arcade.color.WHITE, 25,
-                             anchor_x="center")
-            space = 100
-            for score in self.high_scores:
-                color = arcade.color.WHITE
-                if score == self.score:
-                    color = arcade.color.CHARTREUSE
-                arcade.draw_text(str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, color, 25,
-                             anchor_x="center")
-                space += 50
-            
 
     def on_update(self, delta_time):
         """
@@ -146,6 +129,7 @@ class Director(arcade.View):
                     print("Game Over")
                     self.player_list.remove(self.player)
                     self.window.show_view(self.window.math_game)
+                    self.setup()
 
             if self.run_timer == True:
                 self.total_time += delta_time
@@ -160,24 +144,22 @@ class Director(arcade.View):
                 self.player_list.pop()
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
+                self.change_view()
                 self.level_two()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 2:
                 self.level += 1
                 self.coin_list = arcade.SpriteList()
                 self.player_list.pop()
                 self.car_list = arcade.SpriteList()
+                self.change_view()
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
-                if not self.has_contacted_db:
-                    self.has_contacted_db = True
-                    dbi = DB_Interactor(CERT_FILE_PATH)
-                    dbi.update_scores(self.score)
-                    scores_list = dbi.get_all_scores()
-                    self.high_scores = scores_list
-                    
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
                 self.winner = True
+                self.window.endscreen.user_score = self.score
+                self.window.show_view(self.window.endscreen)
+                self.setup()
 
     def on_key_press(self, key, modifiers):
         """Called whenever a key is pressed and will move the player speed by the given movement speed constant.
@@ -289,3 +271,7 @@ class Director(arcade.View):
         self.player_list.append(self.player)
         self.coin_list.append(self.coin)
         self.next_level_sound.play()
+
+    def change_view(self):
+        self.window.playerScore = self.score
+        self.window.show_view(self.window.menu)
