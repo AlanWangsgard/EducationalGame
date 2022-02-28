@@ -7,11 +7,20 @@ from score.score_crud import ScoreCrud
 class Menu(arcade.View):
     def __init__(self, window):
         self.window = window
+        self.manager = arcade.gui.UIManager()
+        self.manager.enable()
         self.background = arcade.load_texture(PICTURES_PATH + "menu.png")
-        self.start_button = arcade.gui.UIFlatButton(
-            center_x=400, center_y=300, text="Start Game", width=200)
-        self.save_button = arcade.gui.UIFlatButton(
-            center_x=400, center_y=350, text="Save Game", width=200)
+
+        self.v_box = arcade.gui.UIBoxLayout()
+        self.start_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
+        self.v_box.add(self.start_button.with_space_around(bottom=20))
+        self.save_button = arcade.gui.UIFlatButton(text="Save Game", width=200)
+        self.v_box.add(self.save_button.with_space_around(bottom=20))
+        self.manager.add(arcade.gui.UIAnchorWidget(
+            anchor_x="center_x",
+            anchor_y="center_y",
+            child=self.v_box
+        ))
         self.playerName = None
 
     def on_show(self):
@@ -30,8 +39,7 @@ class Menu(arcade.View):
         # arcade.set_background_color(arcade.color.RED)
         arcade.draw_text("Menu", self.window.width / 2, self.window.height -100,
                          arcade.color.RASPBERRY, font_size=50, anchor_x="center")
-        self.start_button.draw()
-        self.save_button.draw()
+        self.manager.draw()
         # Maybe draw the player name in the corner
         
     def on_mouse_press(self, _x, _y, _button, _modifiers):
