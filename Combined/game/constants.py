@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 DIR = str(Path(__file__).resolve().parent.parent)
-CERT_FILE_PATH = DIR + "\\db\\" + "cert.json" ##### REPLACE WITH YOUR ADMIN SDK CERT FILENAME.
+CERT_FILE_PATH = DIR + "/db/" + "cert.json" ##### REPLACE WITH YOUR ADMIN SDK CERT FILENAME.
 PICTURES_PATH = DIR + "/pictures/"
 
 # car
