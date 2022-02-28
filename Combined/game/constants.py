@@ -3,6 +3,7 @@ from pathlib import Path
 
 DIR = str(Path(__file__).resolve().parent.parent)
 CERT_FILE_PATH = DIR + "\\db\\" + "cert.json" ##### REPLACE WITH YOUR ADMIN SDK CERT FILENAME.
+PICTURES_PATH = DIR + "/pictures/"
 
 # car
 CAR_SPRITE_SCALING = 0.4
@@ -35,7 +36,5 @@ LIFE_POSITION_START = 20
 LIFE_SPACING = 25
 GAME_OVER = 1
 PLAY_GAME = 0
-
-PICTURES_PATH = os.path.dirname(os.path.abspath(__file__)) + "/pictures/"
 
 MINIMUM_TIME = 5.5
