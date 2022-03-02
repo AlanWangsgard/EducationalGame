@@ -24,9 +24,9 @@ class EndScreen(arcade.View):
         # arcade.draw_text("Menu", self.window.width / 2, self.window.height / 2,
         #                  arcade.color.BABY_BLUE, font_size=50, anchor_x="center")
         final_score = f"Final Score:{self.user_score}"
-        arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
+        arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.BLACK_BEAN, 25,
                             anchor_x="center")
-        arcade.draw_text("High Scores: ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, arcade.color.WHITE, 25,
+        arcade.draw_text("High Scores: ", SCREEN_WIDTH / 2, SCREEN_HEIGHT - 150, arcade.color.BLACK_BEAN, 25,
                             anchor_x="center")
         space = 100
         for score in self.high_scores:
