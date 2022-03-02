@@ -10,7 +10,7 @@ class MidScreen(arcade.View):
         self.window = window
         self.manager = arcade.gui.UIManager()
         self.manager.enable()
-        self.background = arcade.load_texture(PICTURES_PATH + "menu.png")
+        self.background = arcade.load_texture(PICTURES_PATH + "midscreen.png")
 
         self.v_box = arcade.gui.UIBoxLayout()
         self.start_button = arcade.gui.UIFlatButton(text="Next Level", width=200)
