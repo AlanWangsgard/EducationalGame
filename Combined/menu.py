@@ -14,8 +14,10 @@ class Menu(arcade.View):
 
         self.v_box = arcade.gui.UIBoxLayout()
         self.start_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
+        self.start_button.on_click = self.start_click
         self.v_box.add(self.start_button.with_space_around(bottom=20))
         self.save_button = arcade.gui.UIFlatButton(text="Save Game", width=200)
+        self.save_button.on_click = self.save_click
         self.v_box.add(self.save_button.with_space_around(bottom=20))
         self.manager.add(arcade.gui.UIAnchorWidget(
             anchor_x="center_x",
@@ -45,17 +47,15 @@ class Menu(arcade.View):
         self.manager.draw()
         # Maybe draw the player name in the corner
         
-    def on_mouse_press(self, _x, _y, _button, _modifiers):
-        if _x >= 300 and _x <= 500 and _y >=280 and _y <= 320:
-            self.window.show_view(self.window.Frogger)
-        if _x >= 300 and _x <= 500 and _y >= 330 and _y <= 370:
-            # save the game
-            pCrud = PlayerCRUD()
-            pCrud.addPlayer(self.playerName)
-            id = pCrud.getID(self.playerName)
+    def start_click(self, event):
+        self.window.show_view(self.window.Frogger)
 
-            score = self.window.playerScore
-            sCrud = ScoreCrud()
-            sCrud.saveScore(id, score)
+    def save_click(self, event):
+        # save the game
+        pCrud = PlayerCRUD()
+        pCrud.addPlayer(self.playerName)
+        id = pCrud.getID(self.playerName)
 
-
+        score = self.window.playerScore
+        sCrud = ScoreCrud()
+        sCrud.saveScore(id, score)
