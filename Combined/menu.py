@@ -16,9 +16,6 @@ class Menu(arcade.View):
         self.start_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
         self.start_button.on_click = self.start_click
         self.v_box.add(self.start_button.with_space_around(bottom=20))
-        self.save_button = arcade.gui.UIFlatButton(text="Save Game", width=200)
-        self.save_button.on_click = self.save_click
-        self.v_box.add(self.save_button.with_space_around(bottom=20))
         self.load_button = arcade.gui.UIFlatButton(text="Load Game", width=200)
         self.load_button.on_click = self.load_click
         self.v_box.add(self.load_button.with_space_around(bottom=20))
@@ -56,19 +53,6 @@ class Menu(arcade.View):
         
     def start_click(self, event):
         self.window.show_view(self.window.Frogger)
-
-    def save_click(self, event):
-        # save the game
-        pCrud = PlayerCRUD()
-        pCrud.addPlayer(self.window.playerName)
-        id = pCrud.getID(self.window.playerName)
-
-        score = self.window.playerScore
-        sCrud = ScoreCrud()
-        sCrud.saveScore(id, score)
-
-        gsCrud = GameStateCrud()
-        gsCrud.saveGameState(id, self.window.playerLevel, self.window.playerScore, self.window.playerLives)
 
     def load_click(self, event):
         # load the game
