@@ -28,9 +28,9 @@ class PlayerCRUD(CrudDB):
 
     def getID(self, name):
         try:
-            self.getPlayerByName(name)[0]
+            return self.getPlayerByName(name)[0]
         except:
             return -1
 if __name__ == "__main__":
     player = PlayerCRUD()
-    player.addPlayer('Daniell')
+    print(player.getID('TestPlayer'))

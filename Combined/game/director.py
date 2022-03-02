@@ -50,7 +50,7 @@ class Director(arcade.View):
     def on_show_view(self):
         return super().on_show_view()
 
-    def setup(self):
+    def setup(self, level = None, lives = None, score = None):
         """
         starts to run the game
         """
@@ -62,13 +62,25 @@ class Director(arcade.View):
         self.life_list = arcade.SpriteList()
         self.coin = None
         self.player = None
-        self.score = 0
         self.car = None
         self.level = 1
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
         self.level_one()
+        if level == 3:
+            self.level_three()
+        elif level == 2:
+            self.level_two()
+        if lives:
+            while len(self.life_list) > lives:
+                self.life_list.pop()
+            while len(self.life_list) < lives:
+                life = Lives(LIFE_SPACING * (len(self.life_list) + 1))
+                self.life_list.append(life)
+        if score:
+            self.score = score
+
         
     def on_draw(self):
         """
@@ -117,10 +129,11 @@ class Director(arcade.View):
                 self.coin_collision_sound.play()
                 life = Lives(LIFE_SPACING * (len(self.life_list) + 1))
                 self.life_list.append(life)
+                self.score += 500
 
             if arcade.check_for_collision_with_list(self.player, self.car_list):
                 self.player.center_y = 0
-                self.score -= 100
+                self.score -= 1000
                 self.car_collision_sound.play()
                 if self.life_list:
                     self.life_list.pop()
@@ -136,8 +149,9 @@ class Director(arcade.View):
                 minutes = int(self.total_time) // 60
                 seconds = int(self.total_time) % 60
                 seconds_100s = int((self.total_time - seconds) * 100)
-                self.output = f"{minutes:02d}:{seconds:02d}:{seconds_100s:02d}"
-                self.score = round(MINIMUM_TIME / self.total_time * 10000)
+                self.output = f"{minutes:02d}:{seconds:02d}:{seconds_100s:02d}, score : {self.score}"
+                self.score -= 6 #round(MINIMUM_TIME / self.total_time * 10000)
+                self.score = max(self.score, 0)
 
             if self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 1:
                 self.level += 1
@@ -225,6 +239,7 @@ class Director(arcade.View):
         self.player = Player()
         self.coin = Coin()
         self.total_time = 0.0
+        self.score = 12000
         bottom_cars_velocity = [2, 3, -2, -3]
         middle_cars_velocity = [5, 6, -4, -6]
         for i in range(0, NUM_CARS_PER_ROW):
@@ -274,4 +289,4 @@ class Director(arcade.View):
 
     def change_view(self):
         self.window.playerScore = self.score
-        self.window.show_view(self.window.menu)
+        self.window.show_view(self.window.mid_screen)

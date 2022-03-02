@@ -5,7 +5,7 @@ from score.player_crud import PlayerCRUD
 from score.score_crud import ScoreCrud
 from score.game_state_crud import GameStateCrud
 
-class Menu(arcade.View):
+class MidScreen(arcade.View):
     def __init__(self, window):
         self.window = window
         self.manager = arcade.gui.UIManager()
@@ -13,7 +13,7 @@ class Menu(arcade.View):
         self.background = arcade.load_texture(PICTURES_PATH + "menu.png")
 
         self.v_box = arcade.gui.UIBoxLayout()
-        self.start_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
+        self.start_button = arcade.gui.UIFlatButton(text="Next Level", width=200)
         self.start_button.on_click = self.start_click
         self.v_box.add(self.start_button.with_space_around(bottom=20))
         self.save_button = arcade.gui.UIFlatButton(text="Save Game", width=200)
@@ -28,16 +28,11 @@ class Menu(arcade.View):
             child=self.v_box
         ))
 
-        self.playerName = None
-
-    def on_show_view(self):
+    def on_show(self):
         """ This is run once when we switch to this view """
         self.window.clear()
         self.manager.enable()
         arcade.set_background_color(arcade.color.RED)
-        if not self.window.playerName:
-            # display a popup to get the playername
-            self.window.playerName = "TestPlayer"
 
     def on_hide_view(self):
         self.manager.disable()
@@ -49,7 +44,7 @@ class Menu(arcade.View):
                                             800, 600,
                                             self.background)
         # arcade.set_background_color(arcade.color.RED)
-        arcade.draw_text("Menu", self.window.width / 2, self.window.height -100,
+        arcade.draw_text("Level Complete!", self.window.width / 2, self.window.height -100,
                          arcade.color.RASPBERRY, font_size=50, anchor_x="center")
         self.manager.draw()
         # Maybe draw the player name in the corner

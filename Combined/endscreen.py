@@ -30,7 +30,7 @@ class EndScreen(arcade.View):
                             anchor_x="center")
         space = 100
         for score in self.high_scores:
-            color = arcade.color.WHITE
+            color = arcade.color.BLACK_BEAN
             if score == self.user_score:
                 color = arcade.color.CHARTREUSE
             arcade.draw_text(str(score), SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100 - space, color, 25,

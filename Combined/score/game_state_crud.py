@@ -1,6 +1,6 @@
 from datetime import datetime
 from mimetypes import init
-from crud import CrudDB
+from score.crud import CrudDB
 
 
 class GameStateCrud(CrudDB):
@@ -30,6 +30,7 @@ class GameStateCrud(CrudDB):
 
 if __name__ == "__main__":
     gameState = GameStateCrud()
-    print(gameState.saveGameState(1, 6, 14000, 20))
-    # print(gameState.getGameStateByPlayerId(1))
+    print(gameState.saveGameState(10, 6, 14000, 20))
+    state = gameState.getGameStateByPlayerId(10)
+    print(state)
     print(gameState.list())

@@ -1,4 +1,4 @@
-from crud import CrudDB
+from score.crud import CrudDB
 
 
 class ScoreCrud(CrudDB):

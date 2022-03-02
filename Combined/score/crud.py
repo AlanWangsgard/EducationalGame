@@ -1,4 +1,5 @@
 import sqlite3
+from game.constants import DB_PATH
 
 class CrudDB:
     def __init__(self, table) -> None:
@@ -6,7 +7,7 @@ class CrudDB:
         self.table = table
 
     def connect(self):
-        self.connection = sqlite3.connect('scores.db')
+        self.connection = sqlite3.connect(DB_PATH)
 
     def insert(self, fields, values, query = None):
         self.connect()
@@ -34,9 +35,11 @@ class CrudDB:
 
     def getById(self, id:int = None, query = None):
         try:
+            print(query)
             self.connect()
             cur = self.connection.cursor()
             rows = cur.execute(query if query is not None else f"SELECT * FROM {self.table} WHERE id = {id}").fetchall()
+            print(rows)
             self.connection.close()
             return rows[0]
         except:
@@ -44,9 +47,11 @@ class CrudDB:
 
     def getByField(self, field, value):
         try:
+            print(field, value)
             self.connect()
             cur = self.connection.cursor()
             rows = cur.execute(f"SELECT * FROM {self.table} WHERE {field} = {value}").fetchall()
+            print(rows)
             self.connection.close()
             return rows[0]
         except:
