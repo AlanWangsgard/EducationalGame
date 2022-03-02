@@ -1,5 +1,6 @@
 import arcade
 import arcade.gui
+from score.frogger_local_db import FroggerLocalDB
 from game.constants import PICTURES_PATH
 from score.player_crud import PlayerCRUD
 from score.score_crud import ScoreCrud
@@ -21,6 +22,8 @@ class Menu(arcade.View):
             anchor_y="center_y",
             child=self.v_box
         ))
+        localDB = FroggerLocalDB()
+        localDB.initializeDB()
         self.playerName = None
 
     def on_show(self):
