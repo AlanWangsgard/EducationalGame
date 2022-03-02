@@ -1,9 +1,16 @@
-from score.crud import CrudDB
+from crud import CrudDB
 
 
 class ScoreCrud(CrudDB):
     def __init__(self) -> None:
         super().__init__('scores')
+
+    def saveScore(self, player_id, score):
+        player_score = super().getByField("player_id", player_id)
+        if player_score is None:
+            self.addScore(player_id, score)
+        else:
+            self.updateScore(player_score[0], score)
 
     def addScore(self, player_id, score):
         try:
