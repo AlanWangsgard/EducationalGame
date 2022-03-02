@@ -67,11 +67,12 @@ class Director(arcade.View):
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
-        self.level_one()
         if level == 3:
             self.level_three()
         elif level == 2:
             self.level_two()
+        else:
+            self.level_one()
         if lives:
             while len(self.life_list) > lives:
                 self.life_list.pop()
@@ -289,4 +290,6 @@ class Director(arcade.View):
 
     def change_view(self):
         self.window.playerScore = self.score
+        self.window.playerLives = len(self.life_list)
+        self.window.playerLevel = self.level
         self.window.show_view(self.window.mid_screen)
