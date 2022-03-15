@@ -150,7 +150,7 @@ class Director(arcade.View):
                 minutes = int(self.total_time) // 60
                 seconds = int(self.total_time) % 60
                 seconds_100s = int((self.total_time - seconds) * 100)
-                self.output = f"{minutes:02d}:{seconds:02d}:{seconds_100s:02d}, score : {self.score}"
+                self.output = f"{minutes:02d}:{seconds:02d}:{seconds_100s:02d}, score : {self.score} Level: {self.level}"
                 self.score -= 6 #round(MINIMUM_TIME / self.total_time * 10000)
                 self.score = max(self.score, 0)
 
