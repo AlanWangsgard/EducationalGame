@@ -19,6 +19,13 @@ class Menu(arcade.View):
         self.load_button = arcade.gui.UIFlatButton(text="Load Game", width=200)
         self.load_button.on_click = self.load_click
         self.v_box.add(self.load_button.with_space_around(bottom=20))
+        
+        # Bee game button
+        self.bee_game_button = arcade.gui.UIFlatButton(text="Bee Game", width=200)
+        # TODO: change button click action 
+        self.bee_game_button.on_click = self.load_click
+        self.v_box.add(self.bee_game_button.with_space_around(bottom=40))
+        
         self.manager.add(arcade.gui.UIAnchorWidget(
             anchor_x="center_x",
             anchor_y="center_y",
