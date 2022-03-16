@@ -1,10 +1,7 @@
-aaron
-ab
 able
 about
 above
 abroad
-abs
 absent
 abuse
 accent
@@ -26,7 +23,6 @@ actors
 acts
 actual
 acute
-ad
 add
 added
 adding
@@ -36,10 +32,8 @@ admin
 admit
 adobe
 adopt
-ads
 adult
 adults
-advert
 advice
 advise
 aerial
