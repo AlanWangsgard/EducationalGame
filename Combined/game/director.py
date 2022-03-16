@@ -254,6 +254,7 @@ class Director(arcade.View):
         """
         set the environment for level 2 of the game
         """
+        self.window.show_view(self.window.math_game)
         self.background = arcade.load_texture(PICTURES_PATH + "frogger_background_starting_levels.PNG")
         self.player = Player()
         print("Level two")
@@ -273,6 +274,7 @@ class Director(arcade.View):
         """
         set the environment for level 3 of the game
         """
+        self.window.show_view(self.window.math_game)
         self.background = arcade.load_texture(PICTURES_PATH + "frogger_background_finish.PNG")
         print("Level three")
         self.player = Player()
