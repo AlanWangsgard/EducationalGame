@@ -1,44 +1,33 @@
 import arcade
 import random
 
-Width = 1000
-Height = 650
-title = "Dungeon Crawl"
-Character_Scaling = .5
-Character_Movement = 5
-Character_Jump = 20
-Gravity = 1
-Tile_Scaling = .5
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_TITLE, GRASS_ODDS, GRASS_IMAGE, GRASS_SCALE, BEE_IMAGE, BEE_SCALE, BEE_SPEED
 
 class MyGame(arcade.Window):
 
     def __init__(self):
-        super().__init__(Width, Height, title)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         self.scene = None
         self.player_sprite = None
-        self.physics_engine = None
+        self.keys_down = {"up":False, "down":False, "left":False, "right":False}
         arcade.set_background_color(arcade.color.APPLE_GREEN)
     
     def setup(self):
         self.scene = arcade.Scene()
         self.scene.add_sprite_list("Player")
-        self.scene.add_sprite_list("Walls", use_spatial_hash=True)
-        for x in range(1000):
-            for y in range(650):
-                chance = random.randint(0,3000)
-                if chance == 1:
-                    grass = arcade.Sprite(":resources:images/tiles/grass_sprout.png", Tile_Scaling)
+        for x in range(SCREEN_WIDTH):
+            for y in range(SCREEN_HEIGHT):
+                chance = random.randint(0, GRASS_ODDS + 1)
+                if chance == GRASS_ODDS:
+                    grass = arcade.Sprite(GRASS_IMAGE, GRASS_SCALE)
                     grass.center_x = x
                     grass.center_y = y
                     self.scene.add_sprite("Grass", grass)
-        image_source = ":resources:images/enemies/bee.png"
-        self.player_sprite = arcade.Sprite(image_source, Character_Scaling)
+        image_source = BEE_IMAGE
+        self.player_sprite = arcade.Sprite(image_source, BEE_SCALE)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 128
         self.scene.add_sprite("Player", self.player_sprite)
-        self.physics_engine = arcade.PhysicsEngineSimple(
-            self.player_sprite, walls=self.scene["Walls"]
-        )
 
     def on_draw(self):
         arcade.start_render()
@@ -48,34 +37,42 @@ class MyGame(arcade.Window):
     
     def on_key_press(self,key,modifiers):
         if key == arcade.key.UP or key == arcade.key.W:
-            self.player_sprite.change_y = Character_Movement
+            self.keys_down["up"] = True
         elif key == arcade.key.DOWN or key == arcade.key.S:
-            self.player_sprite.change_y = -Character_Movement
+            self.keys_down["down"] = True
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            self.player_sprite.change_x = -Character_Movement
+            self.keys_down["left"] = True
             #self.player_sprite = arcade.Sprite(bee2.png, Character_Scaling)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player_sprite.change_x = Character_Movement
+            self.keys_down["right"] = True
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W:
-            self.player_sprite.change_y = 0
+            self.keys_down["up"] = False
         elif key == arcade.key.DOWN or key == arcade.key.S:
-            self.player_sprite.change_y = 0
+            self.keys_down["down"] = False
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            self.player_sprite.change_x = 0
+            self.keys_down["left"] = False
         elif key == arcade.key.RIGHT or key == arcade.key.D:
-            self.player_sprite.change_x = 0
+            self.keys_down["right"] = False
     
     def on_update(self, delta_time):
-        self.physics_engine.update()
+        if self.keys_down["up"]:
+            self.player_sprite.center_y += BEE_SPEED
+        if self.keys_down["down"]:
+            self.player_sprite.center_y += -BEE_SPEED
+        if self.keys_down["left"]:
+            self.player_sprite.center_x += -BEE_SPEED
+        if self.keys_down["right"]:
+            self.player_sprite.center_x += BEE_SPEED
+        
         if self.player_sprite.center_x < 0:
-            self.player_sprite.center_x = 1000
-        elif self.player_sprite.center_x > 1000:
+            self.player_sprite.center_x = SCREEN_WIDTH
+        elif self.player_sprite.center_x > SCREEN_WIDTH:
             self.player_sprite.center_x = 0
         if self.player_sprite.center_y < 0:
-            self.player_sprite.center_y = 650
-        elif self.player_sprite.center_y > 650:
+            self.player_sprite.center_y = SCREEN_HEIGHT
+        elif self.player_sprite.center_y > SCREEN_HEIGHT:
             self.player_sprite.center_y = 0
 
 def main():
