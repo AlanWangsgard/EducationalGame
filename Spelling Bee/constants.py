@@ -1,8 +1,8 @@
 from pathlib import Path
 
 DIR = str(Path(__file__).resolve().parent.parent)
-PICTURES_PATH = DIR + "/pictures/"
-WORD_LIST_PATH = DIR + "words.txt"
+PICTURES_PATH = DIR + "/Spelling Bee/pictures/"
+WORD_LIST_PATH = DIR + "/Spelling Bee/words.txt"
 
 # Screen
 SCREEN_WIDTH = 800
@@ -19,8 +19,14 @@ BEE_IMAGE = ":resources:images/enemies/bee.png"
 BEE_SCALE = 0.5
 BEE_SPEED = 5
 
-# Colors
-FLOWER_COLORS = []
-LETTER_COLOR = ""
-FLOWER_PADDING = 20
-FLOWER_MIN_Y = 150
+# images
+FLOWER_IMAGES = [":resources:images/items/gemRed.png", ":resources:images/items/gemGreen.png", ":resources:images/items/gemBlue.png"]
+# The flower padding and screen size need to be calculated to satisfy one of the following equations
+# MaxWordLength < MinLettersPerRow * MinLettersPerCol
+# MinLettersPerCol =     MaxY     / Padding - 1
+# MinLettersPerRow = ScreenWidth  / Padding - 1
+FLOWER_PADDING = 133
+FLOWER_MAX_Y = 400
+
+#0 -> 87X -> 261! -> 435! -> 609! -> 783X
+#0 -> 87X -> 261! -> 435X
