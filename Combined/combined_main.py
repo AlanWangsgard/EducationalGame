@@ -5,6 +5,7 @@ from score.frogger_local_db import FroggerLocalDB
 from menu import Menu
 from endscreen import EndScreen
 from mid_screen import MidScreen
+from bee_game.game import BeeGame
 import arcade
 
 class Conductor():
@@ -25,6 +26,7 @@ class Conductor():
         self.window.math_game = MathQuestionView(self.window)
         self.window.endscreen = EndScreen(self.window)
         self.window.mid_screen = MidScreen(self.window)
+        self.window.BeeGame = BeeGame(self.window)
         self.window.playerScore = 0
         self.window.playerLives = 0
         self.window.playerLevel = 0
