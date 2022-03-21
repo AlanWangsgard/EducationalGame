@@ -1,6 +1,5 @@
 import arcade
 import random
-
 from bee_game.generate_letter_flowers import generate_letter_flowers
 from bee_game.constants import SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_TITLE, GRASS_ODDS, GRASS_IMAGE, GRASS_SCALE, BEE_IMAGE, BEE_SCALE, BEE_SPEED, WORD_LIST_PATH
 
@@ -10,7 +9,6 @@ class BeeGame(arcade.View):
         self.window = window
         self.scene = None
         self.player_sprite = None
-        self.keys_down = {"up":False, "down":False, "left":False, "right":False}
         with open(WORD_LIST_PATH, "r") as infile:
             self.words = infile.readlines()
     
@@ -19,6 +17,9 @@ class BeeGame(arcade.View):
         self.setup()
 
     def setup(self):
+        self.keys_down = {"up":False, "down":False, "left":False, "right":False}
+        self.score = 0
+
         self.scene = arcade.Scene()
 
         # Add the grass
