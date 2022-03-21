@@ -51,17 +51,31 @@ class BeeGame(arcade.View):
         
     
     def on_key_press(self,key,modifiers):
-        self.letters = generate_letter_flowers(random.choice(self.words).strip())
-        if key == arcade.key.UP or key == arcade.key.W:
+        if key == arcade.key.SPACE:
+            # Player is selecting a letter?
+            print("X", self.player_sprite.center_x)
+            print("Y", self.player_sprite.center_y)
+            for letter_flower in self.letters:
+                if letter_flower.visible:
+                    if     ((letter_flower.get_x() <= self.player_sprite.center_x + 30
+                         and letter_flower.get_x() >= self.player_sprite.center_x - 30)
+                        and (letter_flower.get_y() <  self.player_sprite.center_y + 30
+                         and letter_flower.get_y() >  self.player_sprite.center_y - 30)):
+                        print("at flower", letter_flower.get_value())
+                        letter_flower.visible = False
+        elif key == arcade.key.UP or key == arcade.key.W:
             self.keys_down["up"] = True
         elif key == arcade.key.DOWN or key == arcade.key.S:
             self.keys_down["down"] = True
-            self.window.show_view(self.window.menu)
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.keys_down["left"] = True
             #self.player_sprite = arcade.Sprite(bee2.png, Character_Scaling)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.keys_down["right"] = True
+        elif key == arcade.key.N:
+            self.letters = generate_letter_flowers(random.choice(self.words).strip())
+        elif key == arcade.key.M:
+            self.window.show_view(self.window.menu)
 
     def on_key_release(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W:

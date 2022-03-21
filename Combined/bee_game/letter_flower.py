@@ -34,9 +34,6 @@ class LetterFlower(arcade.Sprite):
     def get_value(self):
         return self.letter
 
-    def set_visible(self, visibility):
-        self.visible = visibility
-
     def get_x(self):
         return self.center_x
 
