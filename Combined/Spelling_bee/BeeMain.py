@@ -1,5 +1,6 @@
 import arcade
 import random
+from bee_game.letter_flower import LetterFlower;
 
 Width = 1000
 Height = 650
@@ -18,6 +19,7 @@ class MyGame(arcade.Window):
         self.player_sprite = None
         self.physics_engine = None
         arcade.set_background_color(arcade.color.APPLE_GREEN)
+        self.lf = LetterFlower("A", 64, 128)
     
     def setup(self):
         self.scene = arcade.Scene()
@@ -57,6 +59,13 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player_sprite.change_x = Character_Movement
 
+        if key == arcade.key.SPACE:
+            print("X", self.player_sprite.center_x, self.lf.get_x())
+            print("Y", self.player_sprite.center_y, self.lf.get_y())
+            if (self.lf.get_x() <= self.player_sprite.center_x + 10 and self.lf.get_x() >= self.player_sprite.center_x - 10) and (self.lf.get_y() < self.player_sprite.center_y + 10 and self.lf.get_y() > self.player_sprite.center_y - 10) and self.lf.visible == True:
+                print("at flower")
+                self.lf.set_visible(False)
+
     def on_key_release(self, key, modifiers):
         if key == arcade.key.UP or key == arcade.key.W:
             self.player_sprite.change_y = 0
@@ -78,6 +87,10 @@ class MyGame(arcade.Window):
         elif self.player_sprite.center_y > 650:
             self.player_sprite.center_y = 0
 
+    # def on_key_press(self, symbol, modifiers: int):
+    #     print("press")
+    #     if self.lf.get_x() == self.player_sprite:
+    #         print("at flower")
 def main():
     window = MyGame()
     window.setup()
