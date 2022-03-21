@@ -1,23 +1,30 @@
-from random import randint
+from random import randint, choices
 from letter_flower import LetterFlower
 from constants import SCREEN_WIDTH, FLOWER_MAX_Y, FLOWER_PADDING
 
 # This function will receive a word, and set up a list of LetterFlowers for the game.
 def generate_letter_flowers(word):
+    print(word)
     #Builds a list of LetterFlowers that are spaced apart enough.
 
     # Verify that the values in constants will work for this word
     # WordLength < MinLettersPerRow * MinLettersPerCol
     # MinLettersPerCol =     MaxY    / Padding
     # MinLettersPerRow = ScreenWidth / Padding
-    if len(word) >= int(SCREEN_WIDTH / FLOWER_PADDING - 1) * int(FLOWER_MAX_Y / FLOWER_PADDING - 1):
+    extra_letters = int(SCREEN_WIDTH / FLOWER_PADDING - 1) * int(FLOWER_MAX_Y / FLOWER_PADDING - 1) - len(word)
+    if extra_letters <= 0:
             print("Error: screen dimensions and padding are not compatible with this word. Try changing \n\tscreen size\n\tpadding\n\tword length")
             return []
+    
+    # Append some random letters to make it a bit more difficult!
+    extra_letters = randint(1, max(extra_letters - 2, 1)) # don't always include as many as possible,
+    for letter in choices("abcdefghijklmnopqrstuvwxyz", k=extra_letters): # pick that many random letters
+        word += letter # add them to the list of letters we need to generate.
 
     flower_list = []
     # Add a LetterFlower for each letter in the word
-    attempts = 0
     for letter in word:
+        attempts = 0
         position_is_safe = False
         while not position_is_safe:
             # See if we've tried too many times

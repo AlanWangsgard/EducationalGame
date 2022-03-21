@@ -25,7 +25,7 @@ FLOWER_IMAGES = [":resources:images/items/gemRed.png", ":resources:images/items/
 # MaxWordLength < MinLettersPerRow * MinLettersPerCol
 # MinLettersPerCol =     MaxY     / Padding - 1
 # MinLettersPerRow = ScreenWidth  / Padding - 1
-FLOWER_PADDING = 133
+FLOWER_PADDING = 100
 FLOWER_MAX_Y = 400
 
 #0 -> 87X -> 261! -> 435! -> 609! -> 783X
