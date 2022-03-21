@@ -61,7 +61,7 @@ class MathQuestionView(arcade.View):
                 print("Correct!")
                 self.__correct += 1
                 if (self.__correct >= 5):
-                    self.window.show_view(self.window.Frogger)
+                    self.window.show_view(self.window.mid_screen)
                 self.new_question()
                 arcade.set_background_color(arcade.color.GRANNY_SMITH_APPLE)
             else:
