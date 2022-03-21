@@ -73,7 +73,7 @@ class BeeGame(arcade.View):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.keys_down["right"] = True
         elif key == arcade.key.N:
-            self.letters = generate_letter_flowers("a")#random.choice(self.words).strip())
+            self.letters = generate_letter_flowers(random.choice(self.words).strip())
         elif key == arcade.key.M:
             self.window.show_view(self.window.menu)
 
