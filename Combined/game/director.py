@@ -63,7 +63,7 @@ class Director(arcade.View):
         self.coin = None
         self.player = None
         self.car = None
-        self.level = 1
+        self.level = 1 if level is None else level
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
