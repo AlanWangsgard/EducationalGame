@@ -1,6 +1,7 @@
 import arcade
 import arcade.gui
 from game.constants import PICTURES_PATH, CRUD_INDEXES
+from game.globalVariables import GlobalVariables
 from score.player_crud import PlayerCRUD
 from score.score_crud import ScoreCrud
 from score.game_state_crud import GameStateCrud
@@ -44,7 +45,11 @@ class MidScreen(arcade.View):
                                             800, 600,
                                             self.background)
         # arcade.set_background_color(arcade.color.RED)
-        arcade.draw_text("Level Complete!", self.window.width / 2, self.window.height -100,
+        if GlobalVariables.WINNER:
+            self.start_button.text = "Next Level"
+        else:
+            self.start_button.text = "Try Again"
+        arcade.draw_text("Level Complete!" if GlobalVariables.WINNER else "Oh no!", self.window.width / 2, self.window.height -100,
                          arcade.color.RASPBERRY, font_size=50, anchor_x="center")
         self.manager.draw()
         # Maybe draw the player name in the corner

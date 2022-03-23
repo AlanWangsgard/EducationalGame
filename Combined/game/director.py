@@ -6,6 +6,7 @@ from game.player import Player
 from game.coin import Coin
 from game.car import Car
 from game.lives import Lives
+from game.globalVariables import GlobalVariables
 
 class Director(arcade.View):
     """A code template for a person who directs the game. The responsibility of 
@@ -67,6 +68,7 @@ class Director(arcade.View):
         self.total_time = 0.0
         self.output = "00:00:00"
         self.run_timer = True
+        GlobalVariables.WINNER = False
         if level == 3:
             self.level_three()
         elif level == 2:
@@ -159,6 +161,7 @@ class Director(arcade.View):
                 self.player_list.pop()
                 self.coin_list = arcade.SpriteList()
                 self.car_list = arcade.SpriteList()
+                GlobalVariables.WINNER = True
                 self.change_view()
                 self.level_two()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 2:
@@ -166,6 +169,7 @@ class Director(arcade.View):
                 self.coin_list = arcade.SpriteList()
                 self.player_list.pop()
                 self.car_list = arcade.SpriteList()
+                GlobalVariables.WINNER = True
                 self.change_view()
                 self.level_three()
             elif self.player.center_y > SCREEN_HEIGHT - 50 and self.level == 3:
