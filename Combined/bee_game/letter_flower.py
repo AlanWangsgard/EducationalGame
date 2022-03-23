@@ -1,7 +1,8 @@
+import arcade
 import random
-from bee_game.constants import FLOWER_COLORS, SCREEN_HEIGHT, SCREEN_WIDTH, FLOWER_PADDING
+from bee_game.constants import FLOWER_IMAGES, SCREEN_WIDTH, FLOWER_PADDING, FLOWER_MAX_Y
 
-class LetterFlower():
+class LetterFlower(arcade.Sprite):
     '''
     constructor receives a letter and sets position,
     get_value() : returns the letter it represents,
@@ -14,36 +15,35 @@ class LetterFlower():
 
         # Be sure to make sure the x and y value you send me
         # follow these guidelines:
-        # FLOWER_PADDING < x < SCREEN_WIDTH - FLOWER_PADDING
-        # FLOWER_PADDING < y < SCREEN_HEIGHT - FLOWER_PADDING
+        # FLOWER_PADDING <= x <= SCREEN_WIDTH - FLOWER_PADDING
+        # FLOWER_PADDING <= y <= SCREEN_HEIGHT - FLOWER_PADDING
         # Distance from this flower to any other is more than FLOWER_PADDING
 
         assert(type(letter) == str)
         assert(len(letter) == 1)
-        assert(FLOWER_PADDING < x < SCREEN_WIDTH - FLOWER_PADDING)
-        assert(FLOWER_PADDING < y < SCREEN_HEIGHT - FLOWER_PADDING)
+        assert(FLOWER_PADDING // 2 <= x <= SCREEN_WIDTH - FLOWER_PADDING // 2)
+        assert(FLOWER_PADDING // 2 <= y <= FLOWER_MAX_Y)
 
+        sprite_img = random.choice(FLOWER_IMAGES)
+        super().__init__(sprite_img)
         self.letter = letter
-        self.x = x
-        self.y = y
+        self.center_x = x
+        self.center_y = y
         self.visible = True
-        self.color = random.choice(FLOWER_COLORS)
 
     def get_value(self):
         return self.letter
 
-    def set_visible(self, visibility):
-        self.visible = visibility
-
     def get_x(self):
-        return self.x
+        return self.center_x
 
     def get_y(self):
-        return self.y
+        return self.center_y
 
     def draw(self):
         if self.visible:
             #Draw the flower
+            super().draw()
             #Draw the letter
-            # One of the two's color should be self.color
-            pass
+            arcade.draw_text(self.letter, self.center_x, self.center_y, arcade.color.DEEP_CHESTNUT, 25,
+                            anchor_x="center")
