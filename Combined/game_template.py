@@ -6,12 +6,16 @@ python -m arcade.examples.drawing_text
 """
 import arcade
 import random
+from game.constants import FONT_PATH, WORDS
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
 SCREEN_TITLE = "Drawing Text Example"
 DEFAULT_LINE_HEIGHT = 45
 DEFAULT_FONT_SIZE = 20
+COLOR = arcade.color.BLACK
+COLOR2 = arcade.color.CEIL
+
 
 
 
@@ -24,6 +28,7 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
 
         arcade.set_background_color(arcade.color.BEIGE)
+
         self.text_angle = 0
         self.time_elapsed = 0.0
         self.turn = 1
@@ -34,10 +39,17 @@ class MyGame(arcade.Window):
 
     def on_show(self):
         
-        list_of_words= ["apple", "cat", "dog", "rain", "who", "what", "where", "how", "why"]
+        with open(WORDS, "r") as infile:
+            self.list_of_words = infile.readlines()
+        
 
-        self.word = random.choice(list_of_words)
+        self.word = random.choice(self.list_of_words)
+        self.letter = self.word[0]
+
         self.highlight = ""
+
+        
+
 
 
 
@@ -55,25 +67,49 @@ class MyGame(arcade.Window):
         self.clear()
 
         # Add the screen title
-
+        counter = 0
         start_x = 0
         start_y = SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 1.5
-        for i in self.word:
-            arcade.draw_text(self.word,
-                            start_x,
+        
+        for letter in self.word:
+            arcade.draw_text(letter,
+                        start_x + counter,
+                        start_y,
+                        COLOR,
+                        DEFAULT_FONT_SIZE * 2,
+                        font_name=FONT_PATH,
+                        width=SCREEN_WIDTH,
+                        align="center")
+            counter += 32.2
+        
+        counter = 0    
+        for letter in self.highlight:
+            arcade.draw_text(letter,
+                            start_x + counter,
                             start_y,
-                            arcade.color.RED,
+                            COLOR2,
                             DEFAULT_FONT_SIZE * 2,
                             width=SCREEN_WIDTH,
                             align="center")
+            counter += 32.2
+
+       
+
+
+
+
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         if self.highlight == self.word:
-            list_of_words= ["apple", "cat", "dog", "rain", "who", "what", "where", "how", "why"]
-            self.word = random.choice(list_of_words)
+    
+            self.word = random.choice(self.list_of_words)
+            self.highlight = ""
+            
         length = len(self.highlight)
         letter = self.word[length]
         self.highlight += letter
+        
+
 
 
 

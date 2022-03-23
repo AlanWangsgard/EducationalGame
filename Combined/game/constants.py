@@ -5,6 +5,9 @@ DIR = str(Path(__file__).resolve().parent.parent)
 CERT_FILE_PATH = DIR + "/db/" + "cert.json" ##### REPLACE WITH YOUR ADMIN SDK CERT FILENAME.
 PICTURES_PATH = DIR + "/pictures/"
 DB_PATH = DIR + "/score/" + "scores.db"
+FONT_PATH = PICTURES_PATH  + "LTYPE.TTF"
+
+WORDS = "/Users/elisabethknudson/CSE 310/EducationalGame/EducationalGame/Combined/game/pictures/words.txt"
 
 # car
 CAR_SPRITE_SCALING = 0.4
