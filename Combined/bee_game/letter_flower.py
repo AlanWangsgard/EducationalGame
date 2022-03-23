@@ -1,6 +1,6 @@
 import arcade
 import random
-from bee_game.constants import FLOWER_IMAGES, SCREEN_WIDTH, FLOWER_PADDING, FLOWER_MAX_Y
+from bee_game.constants import FLOWER_IMAGES, SCREEN_WIDTH, FLOWER_PADDING, FLOWER_MAX_Y, FLOWER_SCALE
 
 class LetterFlower(arcade.Sprite):
     '''
@@ -30,6 +30,7 @@ class LetterFlower(arcade.Sprite):
         self.center_x = x
         self.center_y = y
         self.visible = True
+        self.scale = FLOWER_SCALE
 
     def get_value(self):
         return self.letter
@@ -45,5 +46,5 @@ class LetterFlower(arcade.Sprite):
             #Draw the flower
             super().draw()
             #Draw the letter
-            arcade.draw_text(self.letter, self.center_x, self.center_y, arcade.color.DEEP_CHESTNUT, 25,
+            arcade.draw_text(self.letter, self.center_x, self.center_y, arcade.color.BLACK, 25,
                             anchor_x="center")

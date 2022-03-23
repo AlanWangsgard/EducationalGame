@@ -20,10 +20,11 @@ BEE_SCALE = 0.5
 BEE_SPEED = 5
 
 # images
-FLOWER_IMAGES = [":resources:images/items/gemRed.png", ":resources:images/items/gemGreen.png", ":resources:images/items/gemBlue.png"]
+FLOWER_IMAGES = [PICTURES_PATH+"Blue Flower.png",PICTURES_PATH+"Red Flower.png",PICTURES_PATH+"Purple Flower.png", PICTURES_PATH+"Orange Flower.png", PICTURES_PATH+"Yellow Flower.png"]
 # The flower padding and screen size need to be calculated to satisfy one of the following equations
 # MaxWordLength < MinLettersPerRow * MinLettersPerCol
 # MinLettersPerCol =     MaxY     / Padding - 1
 # MinLettersPerRow = ScreenWidth  / Padding - 1
 FLOWER_PADDING = 100
 FLOWER_MAX_Y = 400
+FLOWER_SCALE = .35
