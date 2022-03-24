@@ -1,25 +1,20 @@
-"""
-Example showing how to draw text to the screen.
 
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.drawing_text
-"""
 import arcade
 import random
 from game.constants import FONT_PATH, WORDS
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
-SCREEN_TITLE = "Drawing Text Example"
+SCREEN_TITLE = ""
 DEFAULT_LINE_HEIGHT = 45
 DEFAULT_FONT_SIZE = 20
 COLOR = arcade.color.BLACK
-COLOR2 = arcade.color.CEIL
+COLOR2 = arcade.color.APPLE_GREEN
 
 
 
 
-class MyGame(arcade.Window):
+class UpperLetters(arcade.Window):
     """
     Main application class.
     """
