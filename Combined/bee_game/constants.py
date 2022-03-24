@@ -27,3 +27,4 @@ FLOWER_IMAGES = [":resources:images/items/gemRed.png", ":resources:images/items/
 # MinLettersPerRow = ScreenWidth  / Padding - 1
 FLOWER_PADDING = 100
 FLOWER_MAX_Y = 400
+GAME_LENGTH = 30 # seconds
