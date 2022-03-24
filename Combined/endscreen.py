@@ -20,9 +20,6 @@ class EndScreen(arcade.View):
         arcade.draw_lrwh_rectangle_textured(0, 0,
                                             SCREEN_WIDTH, SCREEN_HEIGHT,
                                             self.background)
-        # arcade.set_background_color(arcade.color.RED)
-        # arcade.draw_text("Menu", self.window.width / 2, self.window.height / 2,
-        #                  arcade.color.BABY_BLUE, font_size=50, anchor_x="center")
         final_score = f"Final Score:{self.user_score}"
         arcade.draw_text(final_score, SCREEN_WIDTH / 2, SCREEN_HEIGHT - 100, arcade.color.WHITE, 25,
                             anchor_x="center")

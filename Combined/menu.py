@@ -12,10 +12,26 @@ class Menu(arcade.View):
         self.background = arcade.load_texture(PICTURES_PATH + "menu.png")
 
         self.v_box = arcade.gui.UIBoxLayout()
+<<<<<<< HEAD
         self.start_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
         self.v_box.add(self.start_button.with_space_around(bottom=20))
         self.save_button = arcade.gui.UIFlatButton(text="Save Game", width=200)
         self.v_box.add(self.save_button.with_space_around(bottom=20))
+=======
+        self.start_frogger_button = arcade.gui.UIFlatButton(text="Start Game", width=200)
+        self.start_frogger_button.on_click = self.start_frogger_click
+        self.v_box.add(self.start_frogger_button.with_space_around(bottom=20))
+        self.load_button = arcade.gui.UIFlatButton(text="Load Game", width=200)
+        self.load_button.on_click = self.load_click
+        self.v_box.add(self.load_button.with_space_around(bottom=20))
+        
+        # Bee game button
+        self.bee_game_button = arcade.gui.UIFlatButton(text="Bee Game", width=200)
+        # TODO: change button click action 
+        self.bee_game_button.on_click = self.start_bee_game_click
+        self.v_box.add(self.bee_game_button.with_space_around(bottom=40))
+        
+>>>>>>> 7b391b9706eb6c4f4f965c4ba3fecd8dc247cc23
         self.manager.add(arcade.gui.UIAnchorWidget(
             anchor_x="center_x",
             anchor_y="center_y",
@@ -42,6 +58,7 @@ class Menu(arcade.View):
         self.manager.draw()
         # Maybe draw the player name in the corner
         
+<<<<<<< HEAD
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         if _x >= 300 and _x <= 500 and _y >=280 and _y <= 320:
             self.window.show_view(self.window.Frogger)
@@ -56,3 +73,21 @@ class Menu(arcade.View):
             sCrud.saveScore(id, score)
 
 
+=======
+    def start_frogger_click(self, event):
+        self.window.show_view(self.window.Frogger)
+
+    def start_bee_game_click(self, event):
+        self.window.show_view(self.window.BeeGame)
+
+    def load_click(self, event):
+        # load the game
+        pCrud = PlayerCRUD()
+        pid = pCrud.getID(self.window.playerName)
+        print(pid)
+        gsCrud = GameStateCrud()
+        state = gsCrud.getGameStateByPlayerId(pid)
+        print(state)
+        self.window.Frogger.setup(state[CRUD_INDEXES["level"]], state[CRUD_INDEXES["lives"]], state[CRUD_INDEXES["score"]])
+        self.window.show_view(self.window.Frogger)
+>>>>>>> 7b391b9706eb6c4f4f965c4ba3fecd8dc247cc23
