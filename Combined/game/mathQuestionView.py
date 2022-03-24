@@ -56,7 +56,7 @@ class MathQuestionView(arcade.View):
             return
         
         if symbol == arcade.key.ENTER:
-            if self.__question.check_answer(int(self.__user_input)):
+            if self.__user_input.isdigit and self.__question.check_answer(int(self.__user_input)):
                 # They got it right!
                 print("Correct!")
                 self.__correct += 1
