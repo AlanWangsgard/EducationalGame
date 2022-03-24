@@ -1,11 +1,10 @@
 
 import arcade
 import random
-from game.constants import FONT_PATH, WORDS
+from bee_game.constants import FONT_PATH, WORD_LIST_PATH
 
 SCREEN_WIDTH = 1200
 SCREEN_HEIGHT = 800
-SCREEN_TITLE = ""
 DEFAULT_LINE_HEIGHT = 45
 DEFAULT_FONT_SIZE = 20
 COLOR = arcade.color.BLACK
@@ -14,27 +13,15 @@ COLOR2 = arcade.color.APPLE_GREEN
 
 
 
-class UpperLetters(arcade.Window):
+class UpperLetters():
     """
     Main application class.
     """
 
-    def __init__(self, width, height, title):
-        super().__init__(width, height, title)
-
-        arcade.set_background_color(arcade.color.BEIGE)
-
-        self.text_angle = 0
-        self.time_elapsed = 0.0
-        self.turn = 1
-
-    def on_update(self, delta_time):
-        self.text_angle += 1
-        self.time_elapsed += delta_time
-
-    def on_show(self):
+    def __init__(self):
         
-        with open(WORDS, "r") as infile:
+        
+        with open(WORD_LIST_PATH, "r") as infile:
             self.list_of_words = infile.readlines()
         
 
@@ -42,24 +29,18 @@ class UpperLetters(arcade.Window):
         self.letter = self.word[0]
 
         self.highlight = ""
-
-        
-
-
-
-
         
             
 
 
-    def on_draw(self):
+    def draw(self):
         """
         Render the screen.
         """
 
         # This command should happen before we start drawing. It will clear
         # the screen to the background color, and erase what we drew last frame.
-        self.clear()
+       
 
         # Add the screen title
         counter = 0
@@ -90,29 +71,45 @@ class UpperLetters(arcade.Window):
 
        
 
+    def highlight_letter(self):
 
-
-
-
-    def on_mouse_press(self, _x, _y, _button, _modifiers):
-        if self.highlight == self.word:
-    
-            self.word = random.choice(self.list_of_words)
-            self.highlight = ""
             
         length = len(self.highlight)
         letter = self.word[length]
         self.highlight += letter
+
+    def new_word(self):
+
+       
+    
+        self.word = random.choice(self.list_of_words)
+        self.highlight = ""
+    
+    def is_next_letter(self, letter):
+        length = len(self.highlight)
+        next_letter = self.word[length]
+
+        if letter == next_letter:
+            return True
+
+        if letter != next_letter:
+            return False
+        
+    
+    
+    def is_highlight(self,):
+        length = len(self.highlight)
+        if length == len(self.word):
+            return True
+
+        if length != len(self.word):
+            return False
+
+
+
+
         
 
 
 
 
-
-def main():
-    UpperLetters(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-    arcade.run()
-
-
-if __name__ == "__main__":
-    main()
