@@ -3,7 +3,7 @@ from pathlib import Path
 DIR = str(Path(__file__).resolve().parent.parent)
 PICTURES_PATH = DIR + "/pictures/"
 WORD_LIST_PATH = DIR + "/bee_game/words.txt"
-
+FONT_PATH = PICTURES_PATH  + "Azeret.ttf"
 # Screen
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600

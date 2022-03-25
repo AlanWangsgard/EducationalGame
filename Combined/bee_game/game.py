@@ -1,8 +1,8 @@
 import arcade
 import random
 import time
-from datetime import datetime
 from bee_game.generate_letter_flowers import generate_letter_flowers
+from bee_game.target_word import TargetWord
 from bee_game.constants import SCREEN_HEIGHT, SCREEN_WIDTH, GRASS_ODDS, GRASS_IMAGE, GRASS_SCALE, BEE_IMAGE, BEE_SCALE, BEE_SPEED, WORD_LIST_PATH, GAME_LENGTH
 
 class BeeGame(arcade.View):
@@ -39,8 +39,10 @@ class BeeGame(arcade.View):
         self.player_sprite = arcade.Sprite(image_source, BEE_SCALE)
         self.player_sprite.center_x = 64
         self.player_sprite.center_y = 128
+        # Pick a word to start with
+        self.target_word = TargetWord()
         # Add the letter flowers.
-        self.letters = generate_letter_flowers(random.choice(self.words).strip())
+        self.letters = generate_letter_flowers(self.target_word.new_word())
 
     def on_draw(self):
         arcade.start_render()
@@ -50,6 +52,7 @@ class BeeGame(arcade.View):
         for letter in self.letters:
             letter.draw()
         # Draw the player
+        self.target_word.draw()
         self.player_sprite.draw()
         if self.game_over:
             arcade.draw_text("Nice Job!", SCREEN_WIDTH // 2, SCREEN_HEIGHT * 3 // 4, arcade.color.FASHION_FUCHSIA, 25,
@@ -72,6 +75,20 @@ class BeeGame(arcade.View):
                         and letter_flower.get_y() >  self.player_sprite.center_y - 30)):
                         print("at flower", letter_flower.get_value())
                         letter_flower.visible = False
+                        if self.target_word.is_next_letter(letter_flower.get_value()):
+                            self.target_word.highlight_letter()
+                            self.score += 1
+                        else:
+                            self.target_word.unhighlight()
+                            for letter_flower in self.letters:
+                                if not letter_flower.visible:
+                                    letter_flower.visible = True
+                                    self.score -= 1
+                        if self.target_word.is_highlighted():
+                            self.score += len(self.letters) # 1 point for each letter in the word, and a couple random bonus points ;)
+                            self.letters = generate_letter_flowers(self.target_word.new_word())
+                        break
+
         elif key == arcade.key.UP or key == arcade.key.W:
             self.keys_down["up"] = True
         elif key == arcade.key.DOWN or key == arcade.key.S:
@@ -81,10 +98,6 @@ class BeeGame(arcade.View):
             #self.player_sprite = arcade.Sprite(bee2.png, Character_Scaling)
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.keys_down["right"] = True
-        ###### DEBUG ONLY!!!
-        elif key == arcade.key.N:
-            self.letters = generate_letter_flowers(random.choice(self.words).strip())
-        ###### end DEBUG ONLY!!
         elif key == arcade.key.M:
             self.window.show_view(self.window.menu)
 
