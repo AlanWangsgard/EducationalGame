@@ -40,7 +40,7 @@ class TargetWord():
        
 
         # Add the screen title
-        counter = 0
+        counter = int(-25 * len(self.word) / 2)
         start_x = 0
         start_y = SCREEN_HEIGHT - DEFAULT_LINE_HEIGHT * 1.5
         
@@ -55,13 +55,13 @@ class TargetWord():
                         align="center")
             counter += 25
         
-        counter = 0    
+        counter = int(-25 * len(self.word) / 2)
         for letter in self.highlight:
             arcade.draw_text(letter,
                             start_x + counter,
                             start_y,
                             COLOR2,
-                            DEFAULT_FONT_SIZE * 2 + 2,
+                            DEFAULT_FONT_SIZE * 2 + 1,
                             font_name=FONT_PATH,
                             width=SCREEN_WIDTH,
                             align="center")
