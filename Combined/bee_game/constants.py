@@ -1,9 +1,12 @@
 from pathlib import Path
+import arcade
 
 DIR = str(Path(__file__).resolve().parent.parent)
 PICTURES_PATH = DIR + "/pictures/"
 WORD_LIST_PATH = DIR + "/bee_game/words.txt"
-
+FONT_PATH = PICTURES_PATH  + "Azeret.ttf"
+arcade.load_font(FONT_PATH)
+FONT_NAME = "Azeret Mono"
 # Screen
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -28,3 +31,7 @@ FLOWER_IMAGES = [PICTURES_PATH+"Blue Flower.png",PICTURES_PATH+"Red Flower.png",
 FLOWER_PADDING = 100
 FLOWER_MAX_Y = 400
 FLOWER_SCALE = .35
+GAME_LENGTH = 60 # seconds
+
+WORD_COLOR = arcade.color.BLACK
+HIGHLIGHT_COLOR = arcade.color.PURPLE_NAVY

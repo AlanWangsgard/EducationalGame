@@ -1,0 +1,2 @@
+class GlobalVariables:
+    WINNER = False
