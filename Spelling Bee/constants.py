@@ -1,12 +1,9 @@
 from pathlib import Path
-import arcade
 
 DIR = str(Path(__file__).resolve().parent.parent)
-PICTURES_PATH = DIR + "/pictures/"
-WORD_LIST_PATH = DIR + "/bee_game/words.txt"
-FONT_PATH = PICTURES_PATH  + "Azeret.ttf"
-arcade.load_font(FONT_PATH)
-FONT_NAME = "Azeret Mono"
+PICTURES_PATH = DIR + "/Spelling Bee/pictures/"
+WORD_LIST_PATH = DIR + "/Spelling Bee/words.txt"
+
 # Screen
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
@@ -23,15 +20,13 @@ BEE_SCALE = 0.5
 BEE_SPEED = 5
 
 # images
-FLOWER_IMAGES = [PICTURES_PATH+"Blue Flower.png",PICTURES_PATH+"Red Flower.png",PICTURES_PATH+"Purple Flower.png", PICTURES_PATH+"Orange Flower.png", PICTURES_PATH+"Yellow Flower.png"]
+FLOWER_IMAGES = [":resources:images/items/gemRed.png", ":resources:images/items/gemGreen.png", ":resources:images/items/gemBlue.png"]
 # The flower padding and screen size need to be calculated to satisfy one of the following equations
 # MaxWordLength < MinLettersPerRow * MinLettersPerCol
 # MinLettersPerCol =     MaxY     / Padding - 1
 # MinLettersPerRow = ScreenWidth  / Padding - 1
 FLOWER_PADDING = 100
 FLOWER_MAX_Y = 400
-FLOWER_SCALE = .35
-GAME_LENGTH = 60 # seconds
 
-WORD_COLOR = arcade.color.BLACK
-HIGHLIGHT_COLOR = arcade.color.PURPLE_NAVY
+#0 -> 87X -> 261! -> 435! -> 609! -> 783X
+#0 -> 87X -> 261! -> 435X
