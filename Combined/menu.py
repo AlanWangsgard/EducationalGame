@@ -13,7 +13,7 @@ class Menu(arcade.View):
         self.background = arcade.load_texture(PICTURES_PATH + "menu.png")
 
         self.v_box = arcade.gui.UIBoxLayout()
-        self.start_frogger_button = arcade.gui.UIFlatButton(text="Fr0gg3r", width=200)
+        self.start_frogger_button = arcade.gui.UIFlatButton(text="Frogger", width=200)
         self.start_frogger_button.on_click = self.start_frogger_click
         self.v_box.add(self.start_frogger_button.with_space_around(bottom=20))
         self.load_button = arcade.gui.UIFlatButton(text="Load Game", width=200)

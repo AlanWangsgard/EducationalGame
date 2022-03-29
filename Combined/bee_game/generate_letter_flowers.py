@@ -4,7 +4,6 @@ from bee_game.constants import SCREEN_WIDTH, FLOWER_MAX_Y, FLOWER_PADDING
 
 # This function will receive a word, and set up a list of LetterFlowers for the game.
 def generate_letter_flowers(word):
-    print(word)
     #Builds a list of LetterFlowers that are spaced apart enough.
 
     # Verify that the values in constants will work for this word
