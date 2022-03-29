@@ -1,6 +1,6 @@
 import arcade
 import random
-from bee_game.constants import FONT_PATH, FLOWER_IMAGES, SCREEN_WIDTH, FLOWER_PADDING, FLOWER_MAX_Y
+from bee_game.constants import FONT_PATH, FONT_NAME, FLOWER_IMAGES, SCREEN_WIDTH, FLOWER_PADDING, FLOWER_MAX_Y
 
 class LetterFlower(arcade.Sprite):
     '''
@@ -46,4 +46,4 @@ class LetterFlower(arcade.Sprite):
             super().draw()
             #Draw the letter
             arcade.draw_text(self.letter, self.center_x, self.center_y, arcade.color.DEEP_CHESTNUT, 25,
-                            font_name=FONT_PATH, anchor_x="center")
+                            font_name=FONT_NAME, anchor_x="center")

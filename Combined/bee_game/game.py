@@ -3,7 +3,7 @@ import random
 import time
 from bee_game.generate_letter_flowers import generate_letter_flowers
 from bee_game.target_word import TargetWord
-from bee_game.constants import SCREEN_HEIGHT, SCREEN_WIDTH, GRASS_ODDS, GRASS_IMAGE, GRASS_SCALE, BEE_IMAGE, BEE_SCALE, BEE_SPEED, WORD_LIST_PATH, GAME_LENGTH
+from bee_game.constants import FONT_PATH, SCREEN_HEIGHT, SCREEN_WIDTH, GRASS_ODDS, GRASS_IMAGE, GRASS_SCALE, BEE_IMAGE, BEE_SCALE, BEE_SPEED, WORD_LIST_PATH, GAME_LENGTH
 
 class BeeGame(arcade.View):
 
