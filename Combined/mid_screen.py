@@ -23,6 +23,9 @@ class MidScreen(arcade.View):
         self.load_button = arcade.gui.UIFlatButton(text="Load Game", width=200)
         self.load_button.on_click = self.load_click
         self.v_box.add(self.load_button.with_space_around(bottom=20))
+        self.exit_button = arcade.gui.UIFlatButton(text="Exit", width=200)
+        self.exit_button.on_click = self.exit_click
+        self.v_box.add(self.exit_button.with_space_around(bottom=20))
         self.manager.add(arcade.gui.UIAnchorWidget(
             anchor_x="center_x",
             anchor_y="center_y",
@@ -80,3 +83,7 @@ class MidScreen(arcade.View):
         print(state)
         self.window.Frogger.setup(state[CRUD_INDEXES["level"]], state[CRUD_INDEXES["lives"]], state[CRUD_INDEXES["score"]])
         self.window.show_view(self.window.Frogger)
+
+    def exit_click(self, event):
+        # exit the game
+        arcade.close_window()
