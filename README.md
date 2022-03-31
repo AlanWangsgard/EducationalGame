@@ -7,9 +7,15 @@
 # Development Environment
 
 {Describe the tools that you used to develop the software}
+* Visual Studio Code
+* Python
 
 {Describe the programming language that you used and any libraries.}
-
+# Libraries
+* Python Arcade
+* Sqllite 3
+* Firebase Admin
+* 
 # Collaborators
 
 * Preston Millward
