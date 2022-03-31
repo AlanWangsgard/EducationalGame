@@ -1,9 +1,6 @@
 # Overview
 
-
-{Provide a description of your team project.  Describe how to use the software.}
-
-This is a collection of games that will help kindergarten students better understand math and english, while having some fun along the way. In order to launch the game run the combined main file, and you will have acces to the two current games we have completed.
+This is a collection of games that will help kindergarten students better understand math and english, while having some fun along the way. In order to launch the game run the combined main file, and you will have acces to the two current games we have completed. For the frogger game, use the arrow keys to move the frog. The objective is to reach the other side of the traffic lanes, without being hit by a car. The objective of the bee game is to collect the letters of the displayed word, in order. To move the bee use the arrow keys, and to collect a letter use the space key.
 
 # Development Environment
 
