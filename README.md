@@ -5,7 +5,7 @@ This is a collection of games that will help kindergarten students better unders
 # Development Environment
 
 * Visual Studio Code
-* Python 3.8.1
+* Python 3
 
 # Libraries
 * Python Arcade
