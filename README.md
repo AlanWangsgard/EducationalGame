@@ -21,13 +21,11 @@
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
 * [Python Arcade](https://api.arcade.academy/en/latest/)
 * [Python.org](https://www.python.org/)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-* Item 1
-* Item 2
-* Item 3
+* Add score saving to the bee game
+* make the frogger game randomly choose between the bee and math games
+* Add additional functionality to math game, subtraction, multiplication, and division.
