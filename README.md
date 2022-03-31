@@ -12,13 +12,18 @@
 
 # Collaborators
 
-{Provide a list of everyone on your team}
+* Preston Millward
+* Alan Wangsgard
+* Ammon Quarshie
+* Daniel Melo
+* Liz Billman
+* Joseph Linton II 
 
 # Useful Websites
 
 {Make a list of websites that you found helpful in this project}
-* [Web Site Name](http://url.link.goes.here)
-* [Web Site Name](http://url.link.goes.here)
+* [Python Arcade](https://api.arcade.academy/en/latest/)
+* [Python.org](https://www.python.org/)
 
 # Future Work
 
