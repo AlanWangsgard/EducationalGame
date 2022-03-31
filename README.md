@@ -1,7 +1,28 @@
-# EducationalGame
-An educational game written inpython arcade
+# Overview
 
+{Important!  Do not say in this section that this is college assignment.}
 
-This game uses the firebase-admin and arcade python modules.
-You'll likely need to pip install them.
-You will also need a copy of the cert.json file. Keep it extremelly safe so that it never leaks out to the internet.
+{Provide a description of your team project.  Describe how to use the software.}
+
+# Development Environment
+
+{Describe the tools that you used to develop the software}
+
+{Describe the programming language that you used and any libraries.}
+
+# Collaborators
+
+{Provide a list of everyone on your team}
+
+# Useful Websites
+
+{Make a list of websites that you found helpful in this project}
+* [Web Site Name](http://url.link.goes.here)
+* [Web Site Name](http://url.link.goes.here)
+
+# Future Work
+
+{Make a list of things that you need to fix, improve, and add in the future.}
+* Item 1
+* Item 2
+* Item 3
