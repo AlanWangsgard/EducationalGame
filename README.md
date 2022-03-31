@@ -1,21 +1,20 @@
 # Overview
 
-{Important!  Do not say in this section that this is college assignment.}
 
 {Provide a description of your team project.  Describe how to use the software.}
 
+This is a collection of games that will help kindergarten students better understand math and english, while having some fun along the way. In order to launch the game run the combined main file, and you will have acces to the two current games we have completed.
+
 # Development Environment
 
-{Describe the tools that you used to develop the software}
 * Visual Studio Code
-* Python
+* Python 3.8.1
 
-{Describe the programming language that you used and any libraries.}
 # Libraries
 * Python Arcade
 * Sqllite 3
 * Firebase Admin
-* 
+
 # Collaborators
 
 * Preston Millward
