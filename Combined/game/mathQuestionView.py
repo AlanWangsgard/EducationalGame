@@ -41,7 +41,7 @@ class MathQuestionView(arcade.View):
         arcade.draw_text(self.__question.get_operator(), SCREEN_WIDTH / 2 - 100, SCREEN_HEIGHT / 2 + 50,
                           arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The operator.
         arcade.draw_text(self.__question.get_second_num(), SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50,
-                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The second operator.
+                          arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # The second number.
         arcade.draw_text("_____", SCREEN_WIDTH / 2 + 25, SCREEN_HEIGHT / 2 + 25,
                           arcade.color.LAVA, font_size = 80, anchor_x = 'right', anchor_y = 'center') # A big bar across, separating the question from the user's input.
         arcade.draw_text(self.__user_input, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 100,

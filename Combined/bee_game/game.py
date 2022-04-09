@@ -22,7 +22,8 @@ class BeeGame(arcade.View):
         self.game_over = False
         self.keys_down = {"up":False, "down":False, "left":False, "right":False}
         self.score = 0
-        self.time = time.time()
+        self.start_time = time.time()
+        self.time_left = GAME_LENGTH
         self.scene = arcade.Scene()
 
         # Add the grass
@@ -61,19 +62,19 @@ class BeeGame(arcade.View):
                             anchor_x="center")
             arcade.draw_text("Press 'm' to return to the menu", SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, arcade.color.FASHION_FUCHSIA, 15,
                             anchor_x="center")
+        else:
+            arcade.draw_text("Time left: " + str(int(self.time_left)), 10, SCREEN_HEIGHT - 30, arcade.color.TAUPE, 15)
+            arcade.draw_text("Score: " + str(self.score), 10, SCREEN_HEIGHT - 50, arcade.color.TAUPE, 15)
     
     def on_key_press(self,key,modifiers):
         if key == arcade.key.SPACE:
             # Player is selecting a letter?
-            print("X", self.player_sprite.center_x)
-            print("Y", self.player_sprite.center_y)
             for letter_flower in self.letters:
                 if letter_flower.visible:
                     if     ((letter_flower.get_x() <= self.player_sprite.center_x + 30
                         and letter_flower.get_x() >= self.player_sprite.center_x - 30)
                         and (letter_flower.get_y() <  self.player_sprite.center_y + 30
                         and letter_flower.get_y() >  self.player_sprite.center_y - 30)):
-                        print("at flower", letter_flower.get_value())
                         letter_flower.visible = False
                         if self.target_word.is_next_letter(letter_flower.get_value()):
                             self.target_word.highlight_letter()
@@ -130,7 +131,7 @@ class BeeGame(arcade.View):
                 self.player_sprite.center_y = SCREEN_HEIGHT
             elif self.player_sprite.center_y > SCREEN_HEIGHT:
                 self.player_sprite.center_y = 0
-            
-            if time.time() - self.time > GAME_LENGTH:
+            self.time_left = GAME_LENGTH - (time.time() - self.start_time)
+            if self.time_left < 0:
                 # Game ended!
                 self.game_over = True

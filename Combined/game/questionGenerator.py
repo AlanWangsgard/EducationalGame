@@ -42,7 +42,7 @@ class QuestionGenerator:
         elif self.difficulty == 2:
             num1 = rand.randint(10, 20)
             num2 = rand.randint(10, 20)
-        q = Question(num1, operator, num2, num1 - num2)
+        q = Question(max(num1, num2), operator, min(num1, num2), abs(num1 - num2))
         return q
 
     def generate_product_question(self):
@@ -76,7 +76,7 @@ class QuestionGenerator:
         elif self.difficulty == 2:
             num1 = rand.randint(10, 20)
             num2 = rand.randint(10, 20)
-        q = Question(num1, operator, num2, num1 / num2)
+        q = Question(num1*num2, operator, num2, num1)
         return q
 
     def get_difficulty(self):

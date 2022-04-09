@@ -1,10 +1,6 @@
 # Used to interact with Firebase.
 import firebase_admin
 from firebase_admin import credentials, firestore
-# Get current directory. Helps for file access.
-from pathlib import Path
-# Gets the current directory
-DIR = str(Path(__file__).resolve().parent)
 
 class DB_Interactor():
     # These are the names of my top-level collections in Firestore.
